@@ -1,0 +1,457 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Geometrische Konstruktionen</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-inner">
+      <p class="label">Mathematik · Konstruktionen mit Zirkel und Lineal</p>
+      <h1>Geometrische Grundkonstruktionen</h1>
+      <p class="subtitle">
+        Schrittweise Animationen für den Unterricht: klar, ruhig und mit einheitlichem Strichkonzept.
+      </p>
+    </div>
+  </header>
+
+  <main class="page">
+    <section class="intro-card">
+      <h2>Lernpfad</h2>
+      <p>
+        Die Konstruktionen sind untereinander angeordnet: zuerst die einfachen Bausteine,
+        danach Konstruktionen, die diese Grundlagen wiederverwenden. Jede Konstruktion zeigt
+        ihre Legende direkt unter der Zeichnung.
+      </p>
+    </section>
+
+    <section class="learning-path" aria-label="Konstruktionsauswahl nach Schwierigkeit">
+
+      <!-- =====================================================
+           ABSCHNITT 1: GRUNDLAGEN
+           ===================================================== -->
+      <article class="path-group">
+        <div class="path-group-header">
+          <span class="path-level">1</span>
+          <div>
+            <h2>Grundlagen</h2>
+            <p>Diese Konstruktionen sind die Bausteine für fast alles Weitere.</p>
+          </div>
+        </div>
+
+        <a class="construction-card active path-card" href="konstruktionen/strecke-abtragen.html">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- Hilfsstrahl am neuen Startpunkt P -->
+              <line x1="28" y1="72" x2="170" y2="72" class="svg-helper" />
+
+              <!-- Zirkelbogen um P: nur der entscheidende Bereich um Q -->
+              <circle cx="28" cy="72" r="72" class="svg-helper" opacity="0.35" />
+              <path d="M94 43 A72 72 0 0 1 94 101"
+                    class="construction-arc"
+                    style="stroke-width:5;" />
+
+              <!-- fertige neue Strecke PQ -->
+              <line x1="28" y1="72" x2="100" y2="72" class="svg-result" />
+              <circle cx="28" cy="72" r="5" class="svg-point" />
+              <circle cx="100" cy="72" r="5" class="svg-point-new" />
+            </svg>
+          </div>
+          <div>
+            <h3>Strecke abtragen</h3>
+            <p>Übertrage eine gegebene Streckenlänge mit dem Zirkel auf eine Gerade oder einen Strahl.</p>
+            <span>Öffnen →</span>
+          </div>
+        </a>
+
+        <a class="construction-card active path-card" href="konstruktionen/winkel-abtragen.html">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- Hilfsstrahl am neuen Scheitelpunkt P -->
+              <line x1="32" y1="82" x2="170" y2="82" class="svg-helper" />
+              <circle cx="32" cy="82" r="5" class="svg-point" />
+
+              <!-- Zielbogen um P -->
+              <circle cx="32" cy="82" r="48" class="svg-helper" opacity="0.35" />
+              <path d="M80 82 A48 48 0 0 0 69 52"
+                    class="construction-arc"
+                    style="stroke-width:5;" />
+
+              <!-- Punkt G auf dem Hilfsstrahl -->
+              <circle cx="80" cy="82" r="4.5" class="svg-point-new" />
+
+              <!-- Übertragener Abstand: Bogen um G, Schnittpunkt H -->
+              <circle cx="80" cy="82" r="34" class="svg-helper" opacity="0.35" />
+              <path d="M58 56 A34 34 0 0 1 92 50"
+                    class="construction-arc"
+                    style="stroke-width:5;" />
+              <circle cx="69" cy="52" r="5" class="svg-point-new" />
+
+              <!-- fertiger neuer Winkelschenkel -->
+              <line x1="32" y1="82" x2="122" y2="9" class="svg-result" />
+
+              <!-- kleiner Ergebnisbogen für den neuen Winkel -->
+              <path d="M62 82 A30 30 0 0 0 57 66"
+                    class="svg-result"
+                    style="stroke-width:5;" />
+            </svg>
+          </div>
+          <div>
+            <h3>Winkel abtragen</h3>
+            <p>Übertrage einen gegebenen Winkel an einen neuen Scheitelpunkt.</p>
+            <span>Öffnen →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- =====================================================
+           ABSCHNITT 2: SENKRECHTEN
+           ===================================================== -->
+      <article class="path-group">
+        <div class="path-group-header">
+          <span class="path-level">2</span>
+          <div>
+            <h2>Senkrechten</h2>
+            <p>
+              Hier entstehen Senkrechten zu Geraden und Strecken.
+              Die Mittelsenkrechte ist dabei ein besonderer Fall.
+            </p>
+          </div>
+        </div>
+
+        <a class="construction-card active path-card" href="konstruktionen/senkrechte-errichten.html">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebene Gerade mit Punkt P bewusst nicht in der Mitte -->
+              <line x1="18" y1="82" x2="148" y2="82" class="svg-given" />
+              <circle cx="58" cy="82" r="5" class="svg-point-new" />
+
+              <!-- gleich weit entfernte Punkte links und rechts von P -->
+              <circle cx="34" cy="82" r="4.5" class="svg-point" />
+              <circle cx="82" cy="82" r="4.5" class="svg-point" />
+
+              <!-- blasse Hilfskreise -->
+              <circle cx="34" cy="82" r="48" class="svg-helper" opacity="0.35" />
+              <circle cx="82" cy="82" r="48" class="svg-helper" opacity="0.35" />
+
+              <!-- fertige Senkrechte durch P -->
+              <line x1="58" y1="24" x2="58" y2="102" class="svg-result" />
+            </svg>
+          </div>
+          <div>
+            <h3>Senkrechte errichten</h3>
+            <p>Konstruiere zu einer Geraden eine Senkrechte durch einen vorgegebenen Punkt auf der Geraden.</p>
+            <span>Öffnen →</span>
+          </div>
+        </a>
+
+        <a class="construction-card active path-card" href="konstruktionen/mittelsenkrechte.html">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebene Strecke -->
+              <line x1="30" y1="70" x2="130" y2="70" class="svg-given" />
+              <circle cx="30" cy="70" r="5" class="svg-point" />
+              <circle cx="130" cy="70" r="5" class="svg-point" />
+
+              <!-- blasse Hilfskreise -->
+              <circle cx="30" cy="70" r="62" class="svg-helper" opacity="0.38" />
+              <circle cx="130" cy="70" r="62" class="svg-helper" opacity="0.38" />
+
+              <!-- fertige Mittelsenkrechte -->
+              <line x1="80" y1="8" x2="80" y2="102" class="svg-result" />
+            </svg>
+          </div>
+          <div>
+            <h3>Mittelsenkrechte</h3>
+            <p>Konstruiere die Senkrechte durch den Mittelpunkt einer Strecke.</p>
+            <span>Öffnen →</span>
+          </div>
+        </a>
+
+        <a class="construction-card active path-card" href="konstruktionen/lot-faellen.html">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebene Gerade und Punkt außerhalb -->
+              <line x1="20" y1="86" x2="140" y2="86" class="svg-given" />
+              <circle cx="80" cy="24" r="5" class="svg-point-new" />
+
+              <!-- Hilfskreis vom äußeren Punkt zur Geraden -->
+              <circle cx="80" cy="24" r="69" class="svg-helper" opacity="0.35" />
+              <circle cx="47" cy="86" r="4.5" class="svg-point" />
+              <circle cx="113" cy="86" r="4.5" class="svg-point" />
+
+              <!-- blasse Hilfskreise von den Schnittpunkten -->
+              <circle cx="47" cy="86" r="52" class="svg-helper" opacity="0.35" />
+              <circle cx="113" cy="86" r="52" class="svg-helper" opacity="0.35" />
+
+              <!-- fertiges Lot -->
+              <line x1="80" y1="24" x2="80" y2="86" class="svg-result" />
+              <circle cx="80" cy="86" r="4.5" class="svg-point-new" />
+            </svg>
+          </div>
+          <div>
+            <h3>Lot fällen</h3>
+            <p>Konstruiere die Senkrechte von einem Punkt außerhalb auf eine Gerade.</p>
+            <span>Öffnen →</span>
+          </div>
+        </a>
+      </article>
+
+      <!-- =====================================================
+           ABSCHNITT 3: WINKEL
+           ===================================================== -->
+      <article class="path-group">
+        <div class="path-group-header">
+          <span class="path-level">3</span>
+          <div>
+            <h2>Winkel</h2>
+            <p>
+              Hier werden Winkel verändert oder aus vorhandenen Winkeln neu konstruiert.
+            </p>
+          </div>
+        </div>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebener Winkel -->
+              <line x1="35" y1="85" x2="135" y2="85" class="svg-given" />
+              <line x1="35" y1="85" x2="105" y2="30" class="svg-given" />
+              <circle cx="35" cy="85" r="5" class="svg-point" />
+
+              <!-- erster Bogen vom Scheitel aus -->
+              <circle cx="35" cy="85" r="44" class="svg-helper" opacity="0.35" />
+
+              <!-- Ergebnis: Winkelhalbierende -->
+              <line x1="35" y1="85" x2="120" y2="50" class="svg-result" />
+            </svg>
+          </div>
+          <div>
+            <h3>Winkel halbieren</h3>
+            <p>Teile einen Winkel mit Zirkel und Lineal in zwei gleich große Winkel.</p>
+            <span>Geplant</span>
+          </div>
+        </article>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebener Winkel -->
+              <line x1="35" y1="85" x2="135" y2="85" class="svg-given" />
+              <line x1="35" y1="85" x2="90" y2="55" class="svg-given" />
+              <circle cx="35" cy="85" r="5" class="svg-point" />
+
+              <!-- verdoppelter Winkel -->
+              <line x1="35" y1="85" x2="115" y2="25" class="svg-result" />
+
+              <!-- Winkelbögen -->
+              <path d="M70 85 A35 35 0 0 0 64 67" class="svg-helper" />
+              <path d="M70 85 A35 35 0 0 0 57 58" class="svg-result" />
+            </svg>
+          </div>
+          <div>
+            <h3>Winkel verdoppeln</h3>
+            <p>Konstruiere einen Winkel, der doppelt so groß ist wie ein gegebener Winkel.</p>
+            <span>Geplant</span>
+          </div>
+        </article>
+      </article>
+
+      <!-- =====================================================
+           ABSCHNITT 4: KOMPLEXERE KONSTRUKTIONEN
+           ===================================================== -->
+      <article class="path-group">
+        <div class="path-group-header">
+          <span class="path-level">4</span>
+          <div>
+            <h2>Komplexere Konstruktionen</h2>
+            <p>
+              Diese Konstruktionen kombinieren mehrere Grundideen und bereiten Anwendungen vor.
+            </p>
+          </div>
+        </div>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- zu teilende Strecke -->
+              <line x1="25" y1="82" x2="135" y2="82" class="svg-given" />
+              <circle cx="25" cy="82" r="5" class="svg-point" />
+              <circle cx="135" cy="82" r="5" class="svg-point" />
+
+              <!-- Hilfsstrahl -->
+              <line x1="25" y1="82" x2="120" y2="28" class="svg-helper" />
+
+              <!-- gleiche Abstände auf dem Hilfsstrahl -->
+              <circle cx="55" cy="65" r="4" class="svg-point-new" />
+              <circle cx="85" cy="48" r="4" class="svg-point-new" />
+              <circle cx="115" cy="31" r="4" class="svg-point-new" />
+
+              <!-- Parallelen zurück zur Strecke -->
+              <line x1="55" y1="65" x2="63" y2="82" class="svg-helper" />
+              <line x1="85" y1="48" x2="91" y2="82" class="svg-helper" />
+              <line x1="115" y1="31" x2="119" y2="82" class="svg-helper" />
+
+              <!-- Teilpunkte -->
+              <circle cx="63" cy="82" r="4" class="svg-point-new" />
+              <circle cx="91" cy="82" r="4" class="svg-point-new" />
+              <circle cx="119" cy="82" r="4" class="svg-point-new" />
+            </svg>
+          </div>
+          <div>
+            <h3>Strecke in gleich große Teile teilen</h3>
+            <p>Teile eine Strecke ohne Messen in mehrere gleich lange Teilstrecken.</p>
+            <span>Geplant</span>
+          </div>
+        </article>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebene Gerade und Punkt -->
+              <line x1="25" y1="82" x2="135" y2="82" class="svg-given" />
+              <circle cx="55" cy="42" r="5" class="svg-point-new" />
+
+              <!-- konstruierte Parallele -->
+              <line x1="25" y1="42" x2="135" y2="42" class="svg-result" />
+
+              <!-- Abstand / Hilfslinie -->
+              <line x1="55" y1="42" x2="55" y2="82" class="svg-helper" />
+            </svg>
+          </div>
+          <div>
+            <h3>Parallele konstruieren</h3>
+            <p>Konstruiere durch einen Punkt eine Parallele zu einer gegebenen Geraden.</p>
+            <span>Geplant</span>
+          </div>
+        </article>
+      </article>
+
+      <!-- =====================================================
+           ABSCHNITT 5: ANWENDUNGEN
+           ===================================================== -->
+      <article class="path-group">
+        <div class="path-group-header">
+          <span class="path-level">5</span>
+          <div>
+            <h2>Anwendungen</h2>
+            <p>
+              Hier werden Grundkonstruktionen zu konkreten Figuren und Aufgaben kombiniert.
+            </p>
+          </div>
+        </div>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- gegebene Strecke -->
+              <line x1="25" y1="75" x2="135" y2="75" class="svg-given" />
+              <circle cx="25" cy="75" r="5" class="svg-point" />
+              <circle cx="135" cy="75" r="5" class="svg-point" />
+
+              <!-- Viertelungspunkte -->
+              <circle cx="52.5" cy="75" r="4.5" class="svg-point-new" />
+              <circle cx="80" cy="75" r="4.5" class="svg-point-new" />
+              <circle cx="107.5" cy="75" r="4.5" class="svg-point-new" />
+
+              <!-- Hilfslinien -->
+              <line x1="52.5" y1="55" x2="52.5" y2="95" class="svg-helper" />
+              <line x1="80" y1="50" x2="80" y2="100" class="svg-result" />
+              <line x1="107.5" y1="55" x2="107.5" y2="95" class="svg-helper" />
+            </svg>
+          </div>
+          <div>
+            <h3>Strecke vierteln</h3>
+            <p>Teile eine Strecke durch wiederholtes Halbieren in vier gleich lange Teile.</p>
+            <span>Geplant</span>
+          </div>
+        </article>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- Quadrat mit gegebener Grundseite -->
+              <line x1="40" y1="82" x2="120" y2="82" class="svg-given" />
+              <line x1="40" y1="82" x2="40" y2="22" class="svg-result" />
+              <line x1="120" y1="82" x2="120" y2="22" class="svg-result" />
+              <line x1="40" y1="22" x2="120" y2="22" class="svg-result" />
+              <line x1="40" y1="82" x2="120" y2="82" class="svg-result" />
+
+              <!-- Hilfslinien -->
+              <line x1="40" y1="82" x2="40" y2="22" class="svg-helper" opacity="0.45" />
+              <line x1="120" y1="82" x2="120" y2="22" class="svg-helper" opacity="0.45" />
+            </svg>
+          </div>
+          <div>
+            <h3>Quadrat mit gegebener Grundseite</h3>
+            <p>Konstruiere ein Quadrat, wenn eine Seite bereits gegeben ist.</p>
+            <span>Geplant</span>
+          </div>
+        </article>
+      </article>
+
+      <!-- =====================================================
+           ABSCHNITT 6: KREISE AM DREIECK
+           ===================================================== -->
+      <article class="path-group">
+        <div class="path-group-header">
+          <span class="path-level">6</span>
+          <div>
+            <h2>Kreise am Dreieck</h2>
+            <p>
+              Diese Konstruktionen nutzen Mittelsenkrechten und Winkelhalbierende im Dreieck.
+            </p>
+          </div>
+        </div>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- Dreieck -->
+              <path d="M35 86 L75 28 L130 86 Z" class="svg-given" />
+
+              <!-- Mittelsenkrechten angedeutet -->
+              <line x1="82" y1="15" x2="82" y2="98" class="svg-helper" />
+              <line x1="45" y1="58" x2="128" y2="58" class="svg-helper" />
+
+              <!-- Umkreismittelpunkt und Umkreis -->
+              <circle cx="82" cy="58" r="5" class="svg-point-new" />
+              <circle cx="82" cy="58" r="51" class="svg-result" />
+            </svg>
+          </div>
+          <div>
+            <h3>Umkreis eines Dreiecks</h3>
+            <p>Finde den Punkt, der von allen drei Eckpunkten eines Dreiecks gleich weit entfernt ist.</p>
+            <span>Benötigt: Mittelsenkrechte · geplant</span>
+          </div>
+        </article>
+
+        <article class="construction-card disabled path-card">
+          <div class="card-icon" aria-hidden="true">
+            <svg viewBox="0 0 160 110">
+              <!-- Dreieck -->
+              <path d="M35 86 L75 28 L130 86 Z" class="svg-given" />
+
+              <!-- Winkelhalbierende angedeutet -->
+              <line x1="75" y1="28" x2="80" y2="66" class="svg-helper" />
+              <line x1="35" y1="86" x2="80" y2="66" class="svg-helper" />
+              <line x1="130" y1="86" x2="80" y2="66" class="svg-helper" />
+
+              <!-- Inkreismittelpunkt und Inkreis -->
+              <circle cx="80" cy="66" r="5" class="svg-point-new" />
+              <circle cx="80" cy="66" r="22" class="svg-result" />
+            </svg>
+          </div>
+          <div>
+            <h3>Inkreis eines Dreiecks</h3>
+            <p>Konstruiere den Kreis, der alle drei Seiten eines Dreiecks berührt.</p>
+            <span>Benötigt: Winkelhalbierende · geplant</span>
+          </div>
+        </article>
+      </article>
+    </section>
+  </main>
+</body>
+</html>

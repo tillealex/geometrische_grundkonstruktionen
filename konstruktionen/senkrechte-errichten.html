@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Senkrechte errichten</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="header-inner">
+      <p class="label">Grundkonstruktion</p>
+      <h1>Senkrechte errichten</h1>
+      <p class="subtitle">Konstruiere durch einen vorgegebenen Punkt auf einer Geraden eine Senkrechte.</p>
+    </div>
+  </header>
+
+  <main class="page construction-page">
+    <nav class="breadcrumb" aria-label="Navigation">
+      <a href="../index.html">← Zur Übersicht</a>
+    </nav>
+
+    <section class="concept-card">
+      <h2>Konzept</h2>
+      <p>
+        Wir wollen durch den Punkt <strong>P</strong> eine Gerade zeichnen, die zur gegebenen Geraden <strong>g</strong> senkrecht ist.
+        Der Punkt P ist dabei bereits vorgegeben und liegt bewusst <strong>nicht in der Mitte</strong> der sichtbaren Geraden.
+      </p>
+      <p class="concept-hint">
+        Idee: Wir markieren links und rechts von P zwei gleich weit entfernte Punkte A und B. Aus diesen beiden Punkten erzeugen
+        wir mit gleich großen Zirkelbögen einen Punkt C. Die Gerade durch P und C ist die gesuchte Senkrechte.
+      </p>
+<div class="prerequisite-box">
+  <strong>Benötigte Grundlage:</strong>
+  <a href="strecke-abtragen.html">Strecke abtragen</a>
+</div>
+    </section>
+
+    <section class="construction-layout">
+      <article class="drawing-card">
+        <div class="drawing-topline">
+          <h2>Zeichnung</h2>
+          <button id="toggleLabels" class="small-button" type="button">Beschriftung ausblenden</button>
+        </div>
+
+        <svg id="constructionSvg" viewBox="0 0 900 520" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">Senkrechte errichten</title>
+          <desc id="svgDesc">Durch einen Punkt P auf einer Geraden wird eine Senkrechte konstruiert.</desc>
+
+          <defs>
+            <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="520" class="svg-background" />
+
+          <g id="geradeUndPunkt" class="step-element step-1">
+            <line x1="90" y1="340" x2="840" y2="340" class="given-line" />
+            <circle cx="330" cy="340" r="9" class="given-point" />
+            <text x="305" y="378" class="label-text">P</text>
+            <text x="800" y="318" class="tool-label">g</text>
+          </g>
+
+          <g id="punkteAbtragen" class="step-element step-2">
+  <circle cx="330" cy="340" r="120" class="helper-circle faint-circle" />
+
+  <!-- linker hervorgehobener Kreisbogen bei A:
+       nach außen gespiegelt, damit der Abtrag links von P klarer wird -->
+  <path d="M214 371 A120 120 0 0 1 214 309" class="construction-arc" />
+
+  <!-- rechter hervorgehobener Kreisbogen bei B -->
+  <path d="M446 309 A120 120 0 0 1 446 371" class="construction-arc" />
+
+  <circle cx="210" cy="340" r="9" class="new-point" filter="url(#softGlow)" />
+  <circle cx="450" cy="340" r="9" class="new-point" filter="url(#softGlow)" />
+  <text x="190" y="378" class="label-text new-label">A</text>
+  <text x="462" y="378" class="label-text new-label">B</text>
+</g>
+
+          <g id="bogenA" class="step-element step-3">
+            <circle cx="210" cy="340" r="180" class="helper-circle faint-circle" />
+            <path d="M277 173 A180 180 0 0 1 369 256" class="construction-arc" />
+            <path d="M210 340 L330 206" class="radius-line" />
+            <text x="190" y="150" class="tool-label">Zirkelbogen um A</text>
+          </g>
+
+          <g id="bogenB" class="step-element step-4">
+            <circle cx="450" cy="340" r="180" class="helper-circle faint-circle" />
+            <path d="M292 255 A180 180 0 0 1 383 173" class="construction-arc" />
+            <path d="M450 340 L330 206" class="radius-line" />
+            <text x="488" y="150" class="tool-label">Zirkelbogen um B</text>
+          </g>
+
+          <g id="schnittpunkt" class="step-element step-5">
+            <circle cx="330" cy="206" r="10" class="new-point" filter="url(#softGlow)" />
+            <text x="346" y="198" class="label-text new-label">C</text>
+          </g>
+
+<g id="ergebnis" class="step-element step-6">
+  <line x1="330" y1="110" x2="330" y2="500" class="result-line" />
+  <text x="352" y="122" class="result-label text-large">Senkrechte</text>
+</g>
+        </svg>
+      </article>
+
+      <aside class="step-card">
+        <p id="stepCounter" class="step-counter">Schritt 1 von 6</p>
+        <h2 id="stepTitle">Gerade mit Punkt P</h2>
+        <p id="stepText"></p>
+
+        <div class="button-row">
+          <button id="prevStep" type="button">← Zurück</button>
+          <button id="nextStep" type="button" class="primary-button">Weiter →</button>
+        </div>
+        <div class="button-row">
+          <button id="playSteps" type="button">Abspielen</button>
+          <button id="resetSteps" type="button">Neu starten</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="legend-card" aria-label="Legende der Konstruktion">
+      <h2>Legende</h2>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="sample-point given"></span><span>Gegebener Punkt</span></div>
+        <div class="legend-item"><span class="sample-line given"></span><span>Gegebene Gerade</span></div>
+        <div class="legend-item"><span class="sample-line helper"></span><span>Hilfslinie / blasser Hilfskreis</span></div>
+        <div class="legend-item"><span class="sample-line arc"></span><span>entscheidender Zirkelbogen</span></div>
+        <div class="legend-item"><span class="sample-point new"></span><span>Neu konstruierter Punkt</span></div>
+        <div class="legend-item"><span class="sample-line result"></span><span>Fertige Senkrechte</span></div>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <h2>Warum funktioniert das?</h2>
+      <p>
+        Die Punkte A und B sind gleich weit von P entfernt. Dadurch ist P der Mittelpunkt der Strecke AB.
+        Der Punkt C entsteht als Schnittpunkt zweier gleich großer Kreise um A und B und ist deshalb gleich weit von A und B entfernt.
+        Die Gerade durch P und C steht senkrecht auf AB und damit auf der gegebenen Geraden g.
+      </p>
+    </section>
+
+    <section class="info-card links-card">
+      <h2>Diese Konstruktion brauchst du später für …</h2>
+      <div class="link-tags">
+        <span>rechte Winkel konstruieren</span>
+        <span>Koordinatensysteme zeichnen</span>
+        <span>Mittelsenkrechte verstehen</span>
+        <span>Höhen im Dreieck</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/senkrechte-errichten.js"></script>
+</body>
+</html>

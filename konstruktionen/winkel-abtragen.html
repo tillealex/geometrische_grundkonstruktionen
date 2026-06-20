@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Winkel abtragen</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="header-inner">
+      <p class="label">Grundlage</p>
+      <h1>Winkel abtragen</h1>
+      <p class="subtitle">Übertrage einen gegebenen Winkel mit Zirkel und Lineal an einen neuen Punkt.</p>
+    </div>
+  </header>
+
+  <main class="page construction-page">
+    <nav class="breadcrumb" aria-label="Navigation">
+      <a href="../index.html">← Zur Übersicht</a>
+    </nav>
+
+    <section class="concept-card">
+      <h2>Konzept</h2>
+      <p>
+        Wir wollen einen gegebenen Winkel <strong>α</strong> an einer neuen Stelle noch einmal konstruieren.
+        Dazu übertragen wir zuerst einen Kreisbogen und danach den Abstand seiner beiden Schnittpunkte.
+      </p>
+      <p class="concept-hint">
+        Wichtig: Ein Winkel wird hier nicht mit dem Geodreieck gemessen, sondern geometrisch über gleiche Bogenradien und gleiche Abstände übertragen.
+      </p>
+<div class="prerequisite-box">
+  <strong>Benötigte Grundlage:</strong>
+  <a href="strecke-abtragen.html">Strecke abtragen</a>
+</div>
+    </section>
+
+    <section class="construction-layout">
+      <article class="drawing-card">
+        <div class="drawing-topline">
+          <h2>Zeichnung</h2>
+          <button id="toggleLabels" class="small-button" type="button">Beschriftung ausblenden</button>
+        </div>
+
+        <svg id="constructionSvg" viewBox="0 0 900 520" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">Winkel abtragen</title>
+          <desc id="svgDesc">Ein gegebener Winkel wird mit Zirkelbögen an einem neuen Punkt konstruiert.</desc>
+
+          <defs>
+            <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="520" class="svg-background" />
+
+          <g id="gegebenerWinkel" class="step-element step-1">
+            <line x1="165" y1="345" x2="430" y2="345" class="given-line" />
+            <line x1="165" y1="345" x2="375" y2="178" class="given-line" />
+            <circle cx="165" cy="345" r="8" class="given-point" />
+            <text x="140" y="382" class="label-text">S</text>
+            <text x="250" y="315" class="label-text">α</text>
+            <text x="145" y="178" class="tool-label">gegebener Winkel</text>
+          </g>
+
+          <g id="zielstrahl" class="step-element step-2">
+            <line x1="540" y1="345" x2="980" y2="345" class="radius-line" />
+            <circle cx="540" cy="345" r="8" class="given-point" />
+            <text x="518" y="382" class="label-text">P</text>
+            <text x="612" y="392" class="tool-label">Hilfsstrahl</text>
+          </g>
+
+          <g id="bogenOriginal" class="step-element step-3">
+            <circle cx="165" cy="345" r="120" class="helper-circle faint-circle" />
+            <path d="M285 345 A120 120 0 0 0 259 271" class="construction-arc" />
+            <circle cx="285" cy="345" r="9" class="new-point" filter="url(#softGlow)" />
+            <circle cx="259" cy="271" r="9" class="new-point" filter="url(#softGlow)" />
+            <text x="292" y="382" class="label-text new-label">E</text>
+            <text x="268" y="260" class="label-text new-label">F</text>
+          </g>
+
+          <g id="bogenZiel" class="step-element step-4">
+            <circle cx="540" cy="345" r="120" class="helper-circle faint-circle" />
+            <path d="M660 345 A120 120 0 0 0 634 271" class="construction-arc" />
+            <circle cx="660" cy="345" r="9" class="new-point" filter="url(#softGlow)" />
+            <text x="667" y="382" class="label-text new-label">G</text>
+          </g>
+
+          <g id="abstandAufnehmen" class="step-element step-5">
+            <!-- Abstand EF am Originalwinkel aufnehmen:
+                 Hilfskreis um E mit Radius EF.
+                 Hervorgehoben wird nur ein kurzer Bogen um F herum:
+                 ungefähr 20° links und 20° rechts von F. -->
+            <line x1="285" y1="345" x2="259" y2="271" class="radius-line" />
+            <circle cx="285" cy="345" r="78.5" class="helper-circle faint-circle" />
+            <path d="M235.2 284.3 A78.5 78.5 0 0 1 285.9 266.5" class="construction-arc" />
+          </g>
+
+          <g id="abstandUebertragen" class="step-element step-6">
+            <!-- Gleiche Zirkelweite am Zielwinkel von G aus abtragen:
+                 Hilfskreis um G mit Radius EF.
+                 Hervorgehoben wird nur der kurze Bogen um H herum:
+                 ungefähr 20° links und 20° rechts von H. -->
+            <circle cx="660" cy="345" r="78.5" class="helper-circle faint-circle" />
+            <path d="M610.2 284.3 A78.5 78.5 0 0 1 660.9 266.5" class="construction-arc" />
+
+            <circle cx="634" cy="271" r="10" class="new-point" filter="url(#softGlow)" />
+            <text x="645" y="260" class="label-text new-label">H</text>
+          </g>
+
+          <g id="ergebnis" class="step-element step-7">
+            <line x1="540" y1="345" x2="850" y2="100" class="result-line" />
+            <path d="M617 345 A77 77 0 0 0 600 297" class="result-line" />
+            <text x="614" y="318" class="result-label text-large">α</text>
+            <text x="610" y="146" class="result-label text-large">übertragener Winkel</text>
+          </g>
+        </svg>
+      </article>
+
+      <aside class="step-card">
+        <p id="stepCounter" class="step-counter">Schritt 1 von 7</p>
+        <h2 id="stepTitle">Gegebener Winkel</h2>
+        <p id="stepText"></p>
+
+        <div class="button-row">
+          <button id="prevStep" type="button">← Zurück</button>
+          <button id="nextStep" type="button" class="primary-button">Weiter →</button>
+        </div>
+        <div class="button-row">
+          <button id="playSteps" type="button">Abspielen</button>
+          <button id="resetSteps" type="button">Neu starten</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="legend-card" aria-label="Legende der Konstruktion">
+      <h2>Legende</h2>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="sample-point given"></span><span>Gegebener Scheitelpunkt</span></div>
+        <div class="legend-item"><span class="sample-line given"></span><span>Gegebener Schenkel</span></div>
+        <div class="legend-item"><span class="sample-line helper"></span><span>Hilfslinie / blasser Hilfskreis</span></div>
+        <div class="legend-item"><span class="sample-line arc"></span><span>entscheidender Zirkelbogen</span></div>
+        <div class="legend-item"><span class="sample-point new"></span><span>Neu konstruierter Punkt</span></div>
+        <div class="legend-item"><span class="sample-line result"></span><span>Fertiger Winkelschenkel</span></div>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <h2>Warum funktioniert das?</h2>
+      <p>
+        Am gegebenen Winkel erzeugt der erste Bogen zwei Punkte E und F. Der Abstand EF beschreibt die Öffnung des Winkels
+        auf diesem Bogen. Wenn derselbe Radius und derselbe Abstand am neuen Scheitelpunkt übertragen werden,
+        entsteht ein kongruenter Winkel.
+      </p>
+    </section>
+
+    <section class="info-card links-card">
+      <h2>Diese Konstruktion brauchst du später für …</h2>
+      <div class="link-tags">
+        <span>Dreieckskonstruktion WSW</span>
+        <span>Dreieckskonstruktion SWS</span>
+        <span>Winkel vergleichen</span>
+        <span>Winkelhalbierende vorbereiten</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/winkel-abtragen.js"></script>
+</body>
+</html>

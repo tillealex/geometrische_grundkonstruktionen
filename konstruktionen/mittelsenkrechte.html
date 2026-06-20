@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mittelsenkrechte konstruieren</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="header-inner">
+      <p class="label">Grundkonstruktion</p>
+      <h1>Mittelsenkrechte konstruieren</h1>
+      <p class="subtitle">Konstruiere die Gerade, die eine Strecke halbiert und senkrecht auf ihr steht.</p>
+    </div>
+  </header>
+
+  <main class="page construction-page">
+    <nav class="breadcrumb" aria-label="Navigation">
+      <a href="../index.html">← Zur Übersicht</a>
+    </nav>
+
+
+    <section class="concept-card">
+      <h2>Konzept</h2>
+      <p>
+        Wir wollen zur Strecke <strong>AB</strong> eine Gerade finden, die genau durch die Mitte geht und senkrecht auf AB steht.
+        Dafür suchen wir zwei Punkte, die von <strong>A</strong> und <strong>B</strong> gleich weit entfernt sind.
+        Diese Punkte entstehen dort, wo sich zwei gleich große Zirkelbögen schneiden.
+      </p>
+      <p class="concept-hint">
+        Wichtig für das Zeichnen mit dem Zirkel: Du musst nicht die vollständigen Kreise zeichnen.
+        Es reichen die entscheidenden Kreisbögen in der Nähe der späteren Schnittpunkte.
+      </p>
+    </section>
+
+    <section class="construction-layout">
+      <article class="drawing-card">
+        <div class="drawing-topline">
+          <h2>Zeichnung</h2>
+          <button id="toggleLabels" class="small-button" type="button">Beschriftung ausblenden</button>
+        </div>
+
+        <svg id="constructionSvg" viewBox="0 0 900 520" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">Konstruktion der Mittelsenkrechten</title>
+          <desc id="svgDesc">Eine Strecke AB wird mit zwei Hilfskreisen und deren Schnittpunkten konstruiert.</desc>
+
+          <defs>
+            <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="520" class="svg-background" />
+
+          <!-- Grunddaten -->
+          <g id="strecke" class="step-element step-1">
+            <line x1="230" y1="285" x2="670" y2="285" class="given-line" />
+            <circle cx="230" cy="285" r="8" class="given-point" />
+            <circle cx="670" cy="285" r="8" class="given-point" />
+            <text x="210" y="318" class="label-text">A</text>
+            <text x="684" y="318" class="label-text">B</text>
+          </g>
+
+          <!-- Hilfskreise -->
+          <g id="kreisA" class="step-element step-2">
+            <circle cx="230" cy="285" r="260" class="helper-circle faint-circle" />
+            <path d="M440.2 132.2 A260 260 0 0 1 440.2 437.8" class="construction-arc" />
+            <path d="M440.2 132.2 A260 260 0 0 0 440.2 437.8" class="construction-arc hidden-arc" />
+            <path d="M230 285 L357 58" class="radius-line" />
+            <text x="252" y="110" class="tool-label">Zirkelbögen um A</text>
+          </g>
+
+          <g id="kreisB" class="step-element step-3">
+            <circle cx="670" cy="285" r="260" class="helper-circle faint-circle" />
+            <path d="M459.8 132.2 A260 260 0 0 0 459.8 437.8" class="construction-arc" />
+            <path d="M459.8 132.2 A260 260 0 0 1 459.8 437.8" class="construction-arc hidden-arc" />
+            <path d="M670 285 L543 58" class="radius-line" />
+            <text x="520" y="110" class="tool-label">Zirkelbögen um B</text>
+          </g>
+
+          <!-- Schnittpunkte -->
+          <g id="schnittpunkte" class="step-element step-4">
+            <circle cx="450" cy="146" r="10" class="new-point" filter="url(#softGlow)" />
+            <circle cx="450" cy="424" r="10" class="new-point" filter="url(#softGlow)" />
+            <text x="462" y="136" class="label-text new-label">C</text>
+            <text x="462" y="452" class="label-text new-label">D</text>
+          </g>
+
+          <!-- Ergebnis -->
+          <g id="ergebnis" class="step-element step-5">
+            <line x1="450" y1="70" x2="450" y2="500" class="result-line" />
+            <circle cx="450" cy="285" r="8" class="result-point" />
+            <text x="463" y="278" class="label-text result-label">M</text>
+            <text x="472" y="92" class="result-label text-large">Mittelsenkrechte</text>
+          </g>
+        </svg>
+      </article>
+
+      <aside class="step-card">
+        <p id="stepCounter" class="step-counter">Schritt 1 von 5</p>
+        <h2 id="stepTitle">Gegebene Strecke</h2>
+        <p id="stepText"></p>
+
+        <div class="button-row">
+          <button id="prevStep" type="button">← Zurück</button>
+          <button id="nextStep" type="button" class="primary-button">Weiter →</button>
+        </div>
+        <div class="button-row">
+          <button id="playSteps" type="button">Abspielen</button>
+          <button id="resetSteps" type="button">Neu starten</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="legend-card" aria-label="Legende der Konstruktion">
+      <h2>Legende</h2>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="sample-point given"></span><span>Gegebener Punkt</span></div>
+        <div class="legend-item"><span class="sample-line given"></span><span>Gegebene Strecke</span></div>
+        <div class="legend-item"><span class="sample-line helper"></span><span>blasser Hilfskreis</span></div>
+        <div class="legend-item"><span class="sample-line arc"></span><span>entscheidender Zirkelbogen</span></div>
+        <div class="legend-item"><span class="sample-point new"></span><span>Neu konstruierter Punkt</span></div>
+        <div class="legend-item"><span class="sample-line result"></span><span>Fertige Konstruktion</span></div>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <h2>Warum funktioniert das?</h2>
+      <p>
+        Die beiden Kreise haben denselben Radius. Jeder Schnittpunkt der Kreise ist deshalb gleich weit von A und B entfernt.
+        Die Gerade durch diese beiden Schnittpunkte enthält genau die Punkte, die von A und B gleich weit entfernt sind.
+        Deshalb steht sie senkrecht auf der Strecke AB und geht durch ihren Mittelpunkt M.
+      </p>
+    </section>
+
+    <section class="info-card links-card">
+      <h2>Diese Konstruktion brauchst du später für …</h2>
+      <div class="link-tags">
+        <span>Strecke halbieren</span>
+        <span>Umkreis eines Dreiecks</span>
+        <span>Dreieckskonstruktion SSS</span>
+        <span>Mittelpunkt konstruieren</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/mittelsenkrechte.js"></script>
+</body>
+</html>

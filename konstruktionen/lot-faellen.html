@@ -1,0 +1,218 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Lot fällen</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="header-inner">
+      <p class="label">Senkrechten</p>
+      <h1>Lot fällen</h1>
+      <p class="subtitle">
+        Konstruiere von einem Punkt außerhalb einer Geraden die Senkrechte auf diese Gerade.
+      </p>
+    </div>
+  </header>
+
+  <main class="page construction-page">
+    <nav class="breadcrumb" aria-label="Navigation">
+      <a href="../index.html">← Zur Übersicht</a>
+    </nav>
+
+    <section class="concept-card">
+      <h2>Konzept</h2>
+      <p>
+        Wir wollen von einem Punkt <strong>P</strong>, der nicht auf der Geraden <strong>g</strong> liegt,
+        eine Senkrechte auf diese Gerade zeichnen. Diese Senkrechte nennt man auch <strong>Lot</strong>.
+      </p>
+      <p class="concept-hint">
+        Die Idee: Wir suchen zuerst zwei Punkte <strong>A</strong> und <strong>B</strong> auf der Geraden,
+        die gleich weit von P entfernt sind. Danach konstruieren wir die Mittelsenkrechte der Strecke AB.
+        Diese verläuft durch P und trifft die Gerade g im Lotfußpunkt.
+      </p>
+
+      <div class="prerequisite-box">
+        <strong>Benötigte Grundlagen:</strong>
+        <a href="senkrechte-errichten.html">Senkrechte errichten</a>
+        <span> · </span>
+        <a href="mittelsenkrechte.html">Mittelsenkrechte</a>
+      </div>
+    </section>
+
+    <section class="construction-layout">
+      <article class="drawing-card">
+        <div class="drawing-topline">
+          <h2>Zeichnung</h2>
+          <button id="toggleLabels" class="small-button" type="button">Beschriftung ausblenden</button>
+        </div>
+
+        <svg id="constructionSvg" viewBox="0 0 900 520" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">Lot fällen</title>
+          <desc id="svgDesc">
+            Von einem Punkt P außerhalb einer Geraden g wird das Lot auf die Gerade konstruiert.
+          </desc>
+
+          <defs>
+            <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="520" class="svg-background" />
+
+          <!-- =====================================================
+               Schritt 1: Ausgangslage
+               ===================================================== -->
+          <g id="ausgangslage" class="step-element step-1">
+            <line x1="120" y1="390" x2="780" y2="390" class="given-line" />
+            <circle cx="450" cy="135" r="9" class="given-point" />
+            <text x="462" y="124" class="label-text">P</text>
+            <text x="760" y="424" class="tool-label">g</text>
+          </g>
+
+          <!-- =====================================================
+               Schritt 2: Kreis um P schneidet die Gerade in A und B
+               Mittelpunkt P = (450|135), Radius = 315
+               A = (262|390), B = (638|390)
+               Die orangefarbenen Bögen liegen als kurze Ausschnitte
+               auf dem Kreis um P.
+               ===================================================== -->
+          <g id="kreisUmP" class="step-element step-2">
+            <circle cx="450" cy="135" r="315" class="helper-circle faint-circle" />
+
+            <!-- kurzer hervorgehobener Kreisbogen direkt neben A -->
+            <path d="M363.2 437.8 A315 315 0 0 1 188.9 311.1"
+                  class="construction-arc" />
+
+            <!-- kurzer hervorgehobener Kreisbogen direkt neben B -->
+            <path d="M711.1 311.1 A315 315 0 0 1 536.8 437.8"
+                  class="construction-arc" />
+
+            <circle cx="262" cy="390" r="9" class="new-point" filter="url(#softGlow)" />
+            <circle cx="638" cy="390" r="9" class="new-point" filter="url(#softGlow)" />
+            <text x="238" y="428" class="label-text new-label">A</text>
+            <text x="650" y="428" class="label-text new-label">B</text>
+          </g>
+
+          <!-- =====================================================
+               Schritt 3: Bogen um A
+               Mittelpunkt A = (262|390), Radius ≈ 260.3
+               Der orangefarbene Bogen liegt auf dem Kreis um A.
+               ===================================================== -->
+          <g id="bogenA" class="step-element step-3">
+            <circle cx="262" cy="390" r="260.3" class="helper-circle faint-circle" />
+
+            <!-- kurzer hervorgehobener Bogen auf dem Kreis um A,
+                 zentriert um den späteren Schnittpunkt C -->
+            <path d="M377.1 156.8 A260.3 260.3 0 0 1 500.1 285.2"
+                  class="construction-arc" />
+          </g>
+
+          <!-- =====================================================
+               Schritt 4: Bogen um B und Schnittpunkt C
+               Mittelpunkt B = (638|390), Radius ≈ 260.3
+               Schnittpunkt C = (450|210)
+               ===================================================== -->
+          <g id="bogenB" class="step-element step-4">
+            <circle cx="638" cy="390" r="260.3" class="helper-circle faint-circle" />
+
+            <!-- kurzer hervorgehobener Bogen auf dem Kreis um B,
+                 ebenfalls zentriert um den Schnittpunkt C -->
+            <path d="M399.9 285.2 A260.3 260.3 0 0 1 522.9 156.8"
+                  class="construction-arc" />
+
+            <!-- korrigierter Schnittpunkt der beiden Kreise -->
+            <circle cx="450" cy="210" r="10" class="new-point" filter="url(#softGlow)" />
+            <text x="462" y="210" class="label-text new-label">C</text>
+          </g>
+
+          <!-- =====================================================
+               Schritt 5: Lot zeichnen
+               Die fertige Gerade durch P und C trifft g im Lotfußpunkt L.
+               ===================================================== -->
+          <g id="lot" class="step-element step-5">
+            <line x1="450" y1="90" x2="450" y2="430" class="result-line" />
+            <circle cx="450" cy="390" r="10" class="result-point" filter="url(#softGlow)" />
+            <text x="462" y="430" class="label-text new-label">L</text>
+            <text x="466" y="92" class="result-label text-large">Lot</text>
+          </g>
+        </svg>
+      </article>
+
+      <aside class="step-card">
+        <p id="stepCounter" class="step-counter">Schritt 1 von 5</p>
+        <h2 id="stepTitle">Ausgangslage</h2>
+        <p id="stepText"></p>
+
+        <div class="button-row">
+          <button id="prevStep" type="button">← Zurück</button>
+          <button id="nextStep" type="button" class="primary-button">Weiter →</button>
+        </div>
+        <div class="button-row">
+          <button id="playSteps" type="button">Abspielen</button>
+          <button id="resetSteps" type="button">Neu starten</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="legend-card" aria-label="Legende der Konstruktion">
+      <h2>Legende</h2>
+      <div class="legend-grid">
+        <div class="legend-item">
+          <span class="sample-point given"></span>
+          <span>Gegebener Punkt</span>
+        </div>
+        <div class="legend-item">
+          <span class="sample-line given"></span>
+          <span>Gegebene Gerade</span>
+        </div>
+        <div class="legend-item">
+          <span class="sample-line helper"></span>
+          <span>Hilfslinie / blasser Hilfskreis</span>
+        </div>
+        <div class="legend-item">
+          <span class="sample-line arc"></span>
+          <span>entscheidender Zirkelbogen</span>
+        </div>
+        <div class="legend-item">
+          <span class="sample-point new"></span>
+          <span>Neu konstruierter Punkt</span>
+        </div>
+        <div class="legend-item">
+          <span class="sample-line result"></span>
+          <span>Fertiges Lot</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <h2>Warum funktioniert das?</h2>
+      <p>
+        Die Punkte A und B liegen beide auf der Geraden g und haben denselben Abstand zum Punkt P.
+        Dadurch liegt P auf der Mittelsenkrechten der Strecke AB. Wenn wir diese Mittelsenkrechte zeichnen,
+        steht sie senkrecht auf AB und damit auch senkrecht auf der Geraden g.
+        Der Schnittpunkt mit g ist der Lotfußpunkt L.
+      </p>
+    </section>
+
+    <section class="info-card links-card">
+      <h2>Diese Konstruktion brauchst du später für …</h2>
+      <div class="link-tags">
+        <span>Abstand Punkt–Gerade</span>
+        <span>Höhen im Dreieck</span>
+        <span>Abstandskonstruktionen</span>
+        <span>geometrische Beweise</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/lot-faellen.js"></script>
+</body>
+</html>

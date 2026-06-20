@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Strecke abtragen</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+  <header class="site-header compact">
+    <div class="header-inner">
+      <p class="label">Grundlage</p>
+      <h1>Strecke abtragen</h1>
+      <p class="subtitle">Übertrage eine gegebene Streckenlänge mit dem Zirkel auf einen Hilfsstrahl.</p>
+    </div>
+  </header>
+
+  <main class="page construction-page">
+    <nav class="breadcrumb" aria-label="Navigation">
+      <a href="../index.html">← Zur Übersicht</a>
+    </nav>
+
+    <section class="concept-card">
+      <h2>Konzept</h2>
+      <p>
+        Wir wollen die Länge der Strecke <strong>AB</strong> an einer neuen Stelle noch einmal zeichnen.
+        Dafür nehmen wir die Länge mit dem Zirkel auf und übertragen sie vom neuen Startpunkt <strong>P</strong> aus auf einen Hilfsstrahl.
+      </p>
+      <p class="concept-hint">
+        Wichtig: Der Zirkel speichert die Länge. Du misst also nicht mit Zahlen, sondern überträgst die Strecke direkt geometrisch.
+      </p>
+    </section>
+
+    <section class="construction-layout">
+      <article class="drawing-card">
+        <div class="drawing-topline">
+          <h2>Zeichnung</h2>
+          <button id="toggleLabels" class="small-button" type="button">Beschriftung ausblenden</button>
+        </div>
+
+        <svg id="constructionSvg" viewBox="0 0 900 520" role="img" aria-labelledby="svgTitle svgDesc">
+          <title id="svgTitle">Strecke abtragen</title>
+          <desc id="svgDesc">Eine Strecke AB wird mit dem Zirkel auf einen Hilfsstrahl abgetragen.</desc>
+
+          <defs>
+            <filter id="softGlow" x="-30%" y="-30%" width="160%" height="160%">
+              <feGaussianBlur stdDeviation="4" result="blur" />
+              <feMerge>
+                <feMergeNode in="blur" />
+                <feMergeNode in="SourceGraphic" />
+              </feMerge>
+            </filter>
+          </defs>
+
+          <rect x="0" y="0" width="900" height="520" class="svg-background" />
+
+          <g id="gegebeneStrecke" class="step-element step-1">
+            <line x1="170" y1="150" x2="390" y2="150" class="given-line" />
+            <circle cx="170" cy="150" r="8" class="given-point" />
+            <circle cx="390" cy="150" r="8" class="given-point" />
+            <text x="150" y="188" class="label-text">A</text>
+            <text x="404" y="188" class="label-text">B</text>
+            <text x="210" y="112" class="tool-label">gegebene Länge AB</text>
+          </g>
+
+          <g id="zielstrahl" class="step-element step-2">
+            <line x1="170" y1="360" x2="980" y2="360" class="radius-line" />
+            <circle cx="170" cy="360" r="8" class="given-point" />
+            <text x="150" y="398" class="label-text">P</text>
+            <text x="448" y="404" class="tool-label">Hilfsstrahl</text>
+          </g>
+
+          <g id="zirkelweite" class="step-element step-3">
+            <circle cx="170" cy="150" r="220" class="helper-circle faint-circle" />
+            <path d="M357 35 A220 220 0 0 1 357 265" class="construction-arc" />
+            <path d="M170 150 L390 150" class="radius-line" />
+            <text x="330" y="26" class="tool-label">Länge AB mit dem Zirkel aufnehmen</text>
+          </g>
+
+          <g id="bogenP" class="step-element step-4">
+            <circle cx="170" cy="360" r="220" class="helper-circle faint-circle" />
+            <path d="M372 274 A220 220 0 0 1 372 446" class="construction-arc" />
+            <text x="330" y="260" class="tool-label">mit gleicher Weite in P abtragen</text>
+          </g>
+
+          <g id="ergebnis" class="step-element step-5">
+            <line x1="170" y1="360" x2="390" y2="360" class="result-line" />
+            <circle cx="390" cy="360" r="10" class="new-point" filter="url(#softGlow)" />
+            <text x="404" y="398" class="label-text new-label">Q</text>
+            <text x="226" y="330" class="result-label text-large">PQ = AB</text>
+          </g>
+        </svg>
+      </article>
+
+      <aside class="step-card">
+        <p id="stepCounter" class="step-counter">Schritt 1 von 5</p>
+        <h2 id="stepTitle">Gegebene Strecke</h2>
+        <p id="stepText"></p>
+
+        <div class="button-row">
+          <button id="prevStep" type="button">← Zurück</button>
+          <button id="nextStep" type="button" class="primary-button">Weiter →</button>
+        </div>
+        <div class="button-row">
+          <button id="playSteps" type="button">Abspielen</button>
+          <button id="resetSteps" type="button">Neu starten</button>
+        </div>
+      </aside>
+    </section>
+
+    <section class="legend-card" aria-label="Legende der Konstruktion">
+      <h2>Legende</h2>
+      <div class="legend-grid">
+        <div class="legend-item"><span class="sample-point given"></span><span>Gegebener Punkt</span></div>
+        <div class="legend-item"><span class="sample-line given"></span><span>Gegebene Strecke</span></div>
+        <div class="legend-item"><span class="sample-line helper"></span><span>Hilfslinie / blasser Hilfskreis</span></div>
+        <div class="legend-item"><span class="sample-line arc"></span><span>entscheidender Zirkelbogen</span></div>
+        <div class="legend-item"><span class="sample-point new"></span><span>Neu konstruierter Punkt</span></div>
+        <div class="legend-item"><span class="sample-line result"></span><span>Fertige übertragene Strecke</span></div>
+      </div>
+    </section>
+
+    <section class="info-card">
+      <h2>Warum funktioniert das?</h2>
+      <p>
+        Der Zirkel wird auf die Länge AB eingestellt. Wenn du ihn anschließend unverändert in P einstichst,
+        liegen alle Punkte auf dem Zirkelbogen genau im Abstand AB von P. Der Schnittpunkt Q auf dem Hilfsstrahl erfüllt deshalb PQ = AB.
+      </p>
+    </section>
+
+    <section class="info-card links-card">
+      <h2>Diese Konstruktion brauchst du später für …</h2>
+      <div class="link-tags">
+        <span>Strecken vergleichen</span>
+        <span>Dreieckskonstruktion SSS</span>
+        <span>Kreisradius übertragen</span>
+        <span>regelmäßige Figuren</span>
+      </div>
+    </section>
+  </main>
+
+  <script src="../js/strecke-abtragen.js"></script>
+</body>
+</html>
