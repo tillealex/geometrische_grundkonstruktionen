@@ -53,3 +53,16 @@ Die Seite benötigt keine Internetverbindung.
 - Beamer-Modus ergänzen
 - Druckansicht ergänzen
 - Konstruktionsseiten stärker untereinander verlinken
+
+## Lizenz
+
+Dieses Projekt steht unter der GNU General Public License v3.0.
+
+Das bedeutet: Der Quellcode darf verwendet, verändert und weitergegeben werden. 
+Wer veränderte Versionen veröffentlicht, muss diese ebenfalls unter den Bedingungen der GPLv3 zugänglich machen.
+
+Weitere Informationen stehen in der Datei `LICENSE`.
+
+## Hinweis zur Erstellung
+
+Teile des Codes und der Dokumentation wurden mit Unterstützung von ChatGPT erstellt und anschließend geprüft, angepasst und in das Projekt integriert.
