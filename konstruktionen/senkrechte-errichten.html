@@ -67,33 +67,37 @@
           </g>
 
           <g id="punkteAbtragen" class="step-element step-2">
-  <circle cx="330" cy="340" r="120" class="helper-circle faint-circle" />
+            <!-- Gedachter Kreis um P: zwei Fokusstellen bei A und B, der Rest bleibt nur sehr blass sichtbar. -->
+            <circle cx="330" cy="340" r="120" class="helper-circle faint-circle" opacity="0.08" />
 
-  <!-- linker hervorgehobener Kreisbogen bei A:
-       nach außen gespiegelt, damit der Abtrag links von P klarer wird -->
-  <path d="M214 371 A120 120 0 0 1 214 309" class="construction-arc" />
+            <path d="M221.2 289.3 A120 120 0 0 1 211.8 319.2" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M221.2 390.7 A120 120 0 0 0 211.8 360.8" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M211.8 319.2 A120 120 0 0 1 211.8 360.8" class="construction-arc" />
 
-  <!-- rechter hervorgehobener Kreisbogen bei B -->
-  <path d="M446 309 A120 120 0 0 1 446 371" class="construction-arc" />
+            <path d="M438.8 289.3 A120 120 0 0 1 448.2 319.2" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M438.8 390.7 A120 120 0 0 0 448.2 360.8" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M448.2 319.2 A120 120 0 0 1 448.2 360.8" class="construction-arc" />
 
-  <circle cx="210" cy="340" r="9" class="new-point" filter="url(#softGlow)" />
-  <circle cx="450" cy="340" r="9" class="new-point" filter="url(#softGlow)" />
-  <text x="190" y="378" class="label-text new-label">A</text>
-  <text x="462" y="378" class="label-text new-label">B</text>
-</g>
+            <circle cx="210" cy="340" r="9" class="new-point" filter="url(#softGlow)" />
+            <circle cx="450" cy="340" r="9" class="new-point" filter="url(#softGlow)" />
+            <text x="190" y="378" class="label-text new-label">A</text>
+            <text x="462" y="378" class="label-text new-label">B</text>
+          </g>
 
           <g id="bogenA" class="step-element step-3">
-            <circle cx="210" cy="340" r="180" class="helper-circle faint-circle" />
-            <path d="M277 173 A180 180 0 0 1 369 256" class="construction-arc" />
+            <circle cx="210" cy="340" r="180" class="helper-circle faint-circle" opacity="0.08" />
+            <path d="M215.8 160.1 A180 180 0 0 1 277.0 172.9" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M368.7 255.1 A180 180 0 0 1 388.2 314.5" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M277.0 172.9 A180 180 0 0 1 368.7 255.1" class="construction-arc" />
             <path d="M210 340 L330 206" class="radius-line" />
-            <text x="190" y="150" class="tool-label">Zirkelbogen um A</text>
           </g>
 
           <g id="bogenB" class="step-element step-4">
-            <circle cx="450" cy="340" r="180" class="helper-circle faint-circle" />
-            <path d="M292 255 A180 180 0 0 1 383 173" class="construction-arc" />
+            <circle cx="450" cy="340" r="180" class="helper-circle faint-circle" opacity="0.08" />
+            <path d="M271.8 314.5 A180 180 0 0 1 291.3 255.1" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M383.0 172.9 A180 180 0 0 1 444.2 160.1" class="helper-circle faint-circle" opacity="0.16" />
+            <path d="M291.3 255.1 A180 180 0 0 1 383.0 172.9" class="construction-arc" />
             <path d="M450 340 L330 206" class="radius-line" />
-            <text x="488" y="150" class="tool-label">Zirkelbogen um B</text>
           </g>
 
           <g id="schnittpunkt" class="step-element step-5">
@@ -101,10 +105,11 @@
             <text x="346" y="198" class="label-text new-label">C</text>
           </g>
 
-<g id="ergebnis" class="step-element step-6">
-  <line x1="330" y1="110" x2="330" y2="500" class="result-line" />
-  <text x="352" y="122" class="result-label text-large">Senkrechte</text>
-</g>
+          <g id="ergebnis" class="step-element step-6">
+            <line x1="330" y1="110" x2="330" y2="500" class="result-line" />
+            <path d="M330 300 A40 40 0 0 1 370 340" class="construction-arc" />
+            <circle cx="350" cy="320" r="3.5" class="new-point" />
+          </g>
         </svg>
       </article>
 
