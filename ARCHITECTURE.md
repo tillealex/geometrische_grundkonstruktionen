@@ -43,6 +43,7 @@ geometrische_grundkonstruktionen/
 ├── docs/
 │   └── konstruktionsbausteine.md
 ├── js/
+│   ├── action-types.js
 │   ├── construction-player.js
 │   ├── strecke-abtragen.js
 │   ├── winkel-abtragen.js
@@ -90,17 +91,19 @@ Typischer Aufbau einer Konstruktionsseite:
 
 Die HTML-Datei enthält fachliche Struktur und SVG-Elemente, aber keine große Steuerlogik.
 
-Alle aktiven Konstruktionsseiten laden am Ende zuerst die gemeinsame Steuerung:
+Alle aktiven Konstruktionsseiten laden am Ende die JavaScript-Dateien in dieser Reihenfolge:
 
 ```html
+<script src="../js/action-types.js"></script>
 <script src="../js/construction-player.js"></script>
-```
-
-und danach die konstruktionsspezifische Datei, zum Beispiel:
-
-```html
 <script src="../js/strecke-abtragen.js"></script>
 ```
+
+Die Reihenfolge ist wichtig:
+
+1. `action-types.js` stellt die zentralen fachlichen Typen bereit.
+2. `construction-player.js` stellt die gemeinsame Schrittsteuerung bereit.
+3. Die konstruktionsspezifische Datei definiert die Schritte und startet den Player.
 
 ---
 
@@ -121,6 +124,42 @@ Sie enthält:
 Wichtige Regel:
 
 Wiederkehrende Designentscheidungen gehören nicht in einzelne HTML-Dateien, sondern in `css/style.css`.
+
+---
+
+### `js/action-types.js`
+
+Diese Datei bündelt die zentralen fachlichen Typen der Konstruktionsschritte.
+
+Sie enthält:
+
+- `ConstructionActionTypes`: Konstanten für die verbindlichen `actionType`-Werte
+- `ConstructionActionTypeInfo`: Label und kurze Hilfe zu jedem Typ
+
+Beispiel:
+
+```js
+ConstructionActionTypes.COMPASS_MEASURE // "compass-measure"
+```
+
+Die Metadaten sind bereits vorbereitet, damit spätere Schritte die Bausteine sichtbar anzeigen oder kurze Hilfetexte ausgeben können.
+
+Beispiel:
+
+```js
+ConstructionActionTypeInfo[ConstructionActionTypes.COMPASS_MEASURE]
+```
+
+liefert sinngemäß:
+
+```js
+{
+  label: "Zirkelweite aufnehmen",
+  help: "Der Zirkel wird auf eine vorhandene Länge eingestellt."
+}
+```
+
+`action-types.js` enthält bewusst keine Animation und keine DOM-Steuerung. Die Datei ist nur die zentrale Quelle für fachliche Typen und deren Bedeutungen.
 
 ---
 
@@ -156,7 +195,7 @@ initConstructionPlayer({
 });
 ```
 
-`construction-player.js` nutzt aktuell `title`, `text`, `visible` und optional `active`. Das Feld `actionType` wird als fachliche Zusatzinformation mitgeführt, verändert die Steuerlogik aber noch nicht.
+`construction-player.js` nutzt aktuell `title`, `text`, `visible` und optional `active`. Das Feld `actionType` wird als fachliche Zusatzinformation mitgeführt. Die sichtbare Auswertung von `actionType` ist ein geplanter nächster Schritt.
 
 ---
 
@@ -167,10 +206,12 @@ Die einzelnen Konstruktionsdateien enthalten nur noch die fachliche Konfiguratio
 Standardform:
 
 ```js
+const { COMPASS_MEASURE } = window.ConstructionActionTypes;
+
 const steps = [
   {
     title: "Zirkelweite aufnehmen",
-    actionType: "compass-measure",
+    actionType: COMPASS_MEASURE,
     text: "Stelle den Zirkel auf die Länge AB ein.",
     visible: ["point-a", "point-b", "segment-ab"],
     active: ["segment-ab"]
@@ -182,35 +223,36 @@ initConstructionPlayer({
 });
 ```
 
-`actionType` beschreibt den fachlichen Konstruktionsbaustein eines Schrittes. Die verbindlichen Bausteine stehen in `docs/konstruktionsbausteine.md`.
+`actionType` beschreibt den fachlichen Konstruktionsbaustein eines Schrittes. Die verbindlichen Bausteine stehen in `docs/konstruktionsbausteine.md`; die technischen Konstanten und Metadaten stehen in `js/action-types.js`.
 
-Typische Werte sind:
+Typische Konstanten sind:
 
 ```text
-segment-draw
-line-draw
-circle-draw
-arc-draw
-compass-measure
-distance-transfer
-intersection-mark
-result-highlight
+SEGMENT_DRAW
+LINE_DRAW
+CIRCLE_DRAW
+ARC_DRAW
+COMPASS_MEASURE
+COMPASS_KEEP
+DISTANCE_TRANSFER
+INTERSECTION_MARK
+RESULT_HIGHLIGHT
 ```
 
-Sondertypen sind möglich, wenn sie eine Ausgangslage beschreiben, zum Beispiel:
+Sondertypen für Ausgangslagen:
 
 ```text
-angle-given
-line-given
+ANGLE_GIVEN
+LINE_GIVEN
 ```
 
 Aktueller Stand:
 
-- `strecke-abtragen.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
-- `winkel-abtragen.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
-- `senkrechte-errichten.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
-- `mittelsenkrechte.js` nutzt die gemeinsame Steuerung, typisierte Schritte und enthält zusätzlich eine kleine Zeichnungskorrektur.
-- `lot-faellen.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
+- `strecke-abtragen.js` nutzt zentrale Action-Type-Konstanten.
+- `winkel-abtragen.js` nutzt zentrale Action-Type-Konstanten.
+- `senkrechte-errichten.js` nutzt zentrale Action-Type-Konstanten.
+- `mittelsenkrechte.js` nutzt zentrale Action-Type-Konstanten und enthält zusätzlich eine kleine Zeichnungskorrektur.
+- `lot-faellen.js` nutzt zentrale Action-Type-Konstanten.
 
 Damit ist die gemeinsame Schrittsteuerung für alle aktuell aktiven Konstruktionsseiten ausgerollt und die vorhandenen Schrittlisten sind fachlich typisiert.
 
