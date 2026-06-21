@@ -2,33 +2,33 @@ const { SEGMENT_DRAW, LINE_DRAW, COMPASS_MEASURE, DISTANCE_TRANSFER, RESULT_HIGH
 
 const steps = [
   {
-    title: "Gegebene Strecke",
+    title: "Ausgangsstrecke AB betrachten",
     actionType: SEGMENT_DRAW,
-    text: "Die Strecke AB ist die Länge, die übertragen werden soll. Diese Länge wird später mit dem Zirkel aufgenommen.",
+    text: "Die Strecke AB ist gegeben. Ihre Länge soll an einer neuen Stelle noch einmal konstruiert werden.",
     visible: ["gegebeneStrecke"]
   },
   {
-    title: "Hilfsstrahl zeichnen",
+    title: "Hilfsstrahl ab P zeichnen",
     actionType: LINE_DRAW,
-    text: "Zeichne vom Punkt P aus einen langen Hilfsstrahl. Er dient zunächst nur als Orientierung. Erst am Ende wird die gesuchte Strecke deutlich nachgezogen.",
+    text: "Zeichne vom Punkt P aus einen langen Hilfsstrahl. Auf diesem Hilfsstrahl wird später die gleich lange Strecke markiert.",
     visible: ["gegebeneStrecke", "zielstrahl"]
   },
   {
-    title: "Strecke AB abtragen",
+    title: "Zirkelweite AB aufnehmen",
     actionType: COMPASS_MEASURE,
-    text: "Stich den Zirkel in A ein und öffne ihn bis B. Der blasse Kreis zeigt die eingestellte Zirkelweite. Der markierte Bogen bei B verdeutlicht: Genau diese Länge AB wird aufgenommen.",
+    text: "Stich den Zirkel in A ein und öffne ihn bis B. Damit ist die Länge der Strecke AB im Zirkel eingestellt.",
     visible: ["gegebeneStrecke", "zielstrahl", "zirkelweite"]
   },
   {
-    title: "Länge auf dem Hilfsstrahl abtragen",
+    title: "Länge AB auf den Hilfsstrahl übertragen",
     actionType: DISTANCE_TRANSFER,
-    text: "Stich den Zirkel nun in P ein und schlage mit derselben Weite nur einen kurzen Bogen. Du musst keinen ganzen Kreis zeichnen, sondern nur den Bereich, in dem der Hilfsstrahl getroffen wird.",
+    text: "Stich den Zirkel nun in P ein und schlage mit derselben Weite einen kurzen Bogen. Dort, wo der Bogen den Hilfsstrahl trifft, liegt der neue Endpunkt.",
     visible: ["gegebeneStrecke", "zielstrahl", "zirkelweite", "bogenP"]
   },
   {
-    title: "Endpunkt markieren",
+    title: "Endpunkt Q und Strecke PQ markieren",
     actionType: RESULT_HIGHLIGHT,
-    text: "Der Schnittpunkt des Zirkelbogens mit dem Hilfsstrahl ist Q. Jetzt wird die gesuchte Strecke PQ deutlich nachgezogen. Sie ist genauso lang wie die gegebene Strecke AB.",
+    text: "Markiere den Schnittpunkt als Q und zeichne die Strecke PQ deutlich nach. Die Strecke PQ ist genauso lang wie die gegebene Strecke AB.",
     visible: ["gegebeneStrecke", "zielstrahl", "zirkelweite", "bogenP", "ergebnis"]
   }
 ];

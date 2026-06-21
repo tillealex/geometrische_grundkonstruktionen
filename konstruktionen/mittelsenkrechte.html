@@ -66,21 +66,34 @@
             <text x="684" y="318" class="label-text">B</text>
           </g>
 
-          <!-- Hilfskreise -->
+          <!-- Hilfsbögen um A: Fokusbereiche an den späteren Schnittpunkten C und D -->
           <g id="kreisA" class="step-element step-2">
-            <circle cx="230" cy="285" r="260" class="helper-circle faint-circle" />
-            <path d="M440.2 132.2 A260 260 0 0 1 440.2 437.8" class="construction-arc" />
-            <path d="M440.2 132.2 A260 260 0 0 0 440.2 437.8" class="construction-arc hidden-arc" />
-            <path d="M230 285 L357 58" class="radius-line" />
-            <text x="252" y="110" class="tool-label">Zirkelbögen um A</text>
+            <path d="M291.6 32.4 A260 260 0 0 1 350.9 54.8" class="helper-circle" style="opacity: 0.04" />
+            <path d="M350.9 54.8 A260 260 0 0 1 389.0 79.3" class="helper-circle" style="opacity: 0.10" />
+            <path d="M389.0 79.3 A260 260 0 0 1 440.2 132.2" class="helper-circle" style="opacity: 0.26" />
+            <path d="M440.2 132.2 A260 260 0 0 1 484.0 229.6" class="construction-arc" />
+            <path d="M484.0 229.6 A260 260 0 0 1 489.8 274.6" class="helper-circle" style="opacity: 0.10" />
+
+            <path d="M489.8 295.4 A260 260 0 0 1 484.0 340.4" class="helper-circle" style="opacity: 0.10" />
+            <path d="M484.0 340.4 A260 260 0 0 1 440.2 437.8" class="construction-arc" />
+            <path d="M440.2 437.8 A260 260 0 0 1 389.0 490.7" class="helper-circle" style="opacity: 0.26" />
+            <path d="M389.0 490.7 A260 260 0 0 1 350.9 515.2" class="helper-circle" style="opacity: 0.10" />
+            <path d="M350.9 515.2 A260 260 0 0 1 291.6 537.6" class="helper-circle" style="opacity: 0.04" />
           </g>
 
+          <!-- Hilfsbögen um B: Fokusbereiche an den späteren Schnittpunkten C und D -->
           <g id="kreisB" class="step-element step-3">
-            <circle cx="670" cy="285" r="260" class="helper-circle faint-circle" />
-            <path d="M459.8 132.2 A260 260 0 0 0 459.8 437.8" class="construction-arc" />
-            <path d="M459.8 132.2 A260 260 0 0 1 459.8 437.8" class="construction-arc hidden-arc" />
-            <path d="M670 285 L543 58" class="radius-line" />
-            <text x="520" y="110" class="tool-label">Zirkelbögen um B</text>
+            <path d="M608.4 32.4 A260 260 0 0 0 549.1 54.8" class="helper-circle" style="opacity: 0.04" />
+            <path d="M549.1 54.8 A260 260 0 0 0 511.0 79.3" class="helper-circle" style="opacity: 0.10" />
+            <path d="M511.0 79.3 A260 260 0 0 0 459.8 132.2" class="helper-circle" style="opacity: 0.26" />
+            <path d="M459.8 132.2 A260 260 0 0 0 416.0 229.6" class="construction-arc" />
+            <path d="M416.0 229.6 A260 260 0 0 0 410.2 274.6" class="helper-circle" style="opacity: 0.10" />
+
+            <path d="M410.2 295.4 A260 260 0 0 0 416.0 340.4" class="helper-circle" style="opacity: 0.10" />
+            <path d="M416.0 340.4 A260 260 0 0 0 459.8 437.8" class="construction-arc" />
+            <path d="M459.8 437.8 A260 260 0 0 0 511.0 490.7" class="helper-circle" style="opacity: 0.26" />
+            <path d="M511.0 490.7 A260 260 0 0 0 549.1 515.2" class="helper-circle" style="opacity: 0.10" />
+            <path d="M549.1 515.2 A260 260 0 0 0 608.4 537.6" class="helper-circle" style="opacity: 0.04" />
           </g>
 
           <!-- Schnittpunkte -->
@@ -94,9 +107,10 @@
           <!-- Ergebnis -->
           <g id="ergebnis" class="step-element step-5">
             <line x1="450" y1="70" x2="450" y2="500" class="result-line" />
+            <path d="M450 245 A40 40 0 0 1 490 285" class="result-line" fill="none" />
+            <circle cx="470" cy="265" r="3.5" class="result-point" />
             <circle cx="450" cy="285" r="8" class="result-point" />
-            <text x="463" y="278" class="label-text result-label">M</text>
-            <text x="472" y="92" class="result-label text-large">Mittelsenkrechte</text>
+            <text x="412" y="278" class="label-text result-label">M</text>
           </g>
         </svg>
       </article>

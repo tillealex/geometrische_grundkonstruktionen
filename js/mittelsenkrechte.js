@@ -2,33 +2,33 @@ const { SEGMENT_DRAW, ARC_DRAW, INTERSECTION_MARK, RESULT_HIGHLIGHT } = window.C
 
 const steps = [
   {
-    title: "Gegebene Strecke",
+    title: "Ausgangsstrecke AB betrachten",
     actionType: SEGMENT_DRAW,
-    text: "Zeichne zuerst die Strecke AB. Sie ist die Ausgangsstrecke, zu der die Mittelsenkrechte konstruiert werden soll.",
+    text: "Gegeben ist die Strecke AB. Gesucht ist die Mittelsenkrechte: eine Gerade, die AB halbiert und senkrecht auf AB steht.",
     visible: ["strecke"]
   },
   {
-    title: "Kreis um A zeichnen",
+    title: "Bögen um A zeichnen",
     actionType: ARC_DRAW,
-    text: "Stich den Zirkel in A ein. Wähle einen Radius, der größer als die Hälfte der Strecke AB ist. Zeichne vor allem die beiden Kreisbögen oberhalb und unterhalb der Strecke, wo später Schnittpunkte entstehen.",
+    text: "Stich den Zirkel in A ein. Wähle eine Zirkelweite, die größer als die Hälfte von AB ist, und zeichne Bögen oberhalb und unterhalb der Strecke.",
     visible: ["strecke", "kreisA"]
   },
   {
-    title: "Kreis um B zeichnen",
+    title: "Bögen um B mit gleicher Weite zeichnen",
     actionType: ARC_DRAW,
-    text: "Zeichne mit genau demselben Radius entsprechende Kreisbögen um B. Dort, wo sich die Bögen von A und B treffen, entstehen die beiden Schnittpunkte.",
+    text: "Verändere die Zirkelweite nicht. Stich in B ein und zeichne entsprechende Bögen. Dort, wo sich die Bögen treffen, entstehen zwei Schnittpunkte.",
     visible: ["strecke", "kreisA", "kreisB"]
   },
   {
-    title: "Schnittpunkte markieren",
+    title: "Schnittpunkte C und D markieren",
     actionType: INTERSECTION_MARK,
-    text: "Markiere die beiden Schnittpunkte der Hilfskreise. Wir nennen sie hier C und D.",
+    text: "Markiere die beiden Schnittpunkte der Hilfsbögen. Wir nennen sie C und D.",
     visible: ["strecke", "kreisA", "kreisB", "schnittpunkte"]
   },
   {
-    title: "Mittelsenkrechte zeichnen",
+    title: "Mittelsenkrechte durch C und D zeichnen",
     actionType: RESULT_HIGHLIGHT,
-    text: "Verbinde C und D mit einer Geraden. Diese Gerade ist die Mittelsenkrechte der Strecke AB. Sie schneidet AB im Mittelpunkt M und steht senkrecht auf AB.",
+    text: "Zeichne die Gerade durch C und D deutlich nach. Sie ist die Mittelsenkrechte der Strecke AB und schneidet AB im Mittelpunkt M.",
     visible: ["strecke", "kreisA", "kreisB", "schnittpunkte", "ergebnis"]
   }
 ];

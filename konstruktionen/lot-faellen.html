@@ -81,19 +81,20 @@
                Schritt 2: Kreis um P schneidet die Gerade in A und B
                Mittelpunkt P = (450|135), Radius = 315
                A = (262|390), B = (638|390)
-               Die orangefarbenen Bögen liegen als kurze Ausschnitte
-               auf dem Kreis um P.
                ===================================================== -->
           <g id="kreisUmP" class="step-element step-2">
-            <circle cx="450" cy="135" r="315" class="helper-circle faint-circle" />
+            <!-- Kreis um P mit zwei kurzen Fokusstellen bei A und B -->
+            <path d="M550.5 433.5 A315.0 315.0 0 0 1 361.1 437.2" class="helper-circle" opacity="0.10" />
+            <path d="M361.1 437.2 A315.0 315.0 0 0 1 309.9 417.1" class="helper-circle" opacity="0.22" />
+            <path d="M309.9 417.1 A315.0 315.0 0 0 1 221.9 352.2" class="construction-arc" />
+            <path d="M221.9 352.2 A315.0 315.0 0 0 1 187.6 309.3" class="helper-circle" opacity="0.22" />
+            <path d="M187.6 309.3 A315.0 315.0 0 0 1 135.1 127.3" class="helper-circle" opacity="0.10" />
 
-            <!-- kurzer hervorgehobener Kreisbogen direkt neben A -->
-            <path d="M363.2 437.8 A315 315 0 0 1 188.9 311.1"
-                  class="construction-arc" />
-
-            <!-- kurzer hervorgehobener Kreisbogen direkt neben B -->
-            <path d="M711.1 311.1 A315 315 0 0 1 536.8 437.8"
-                  class="construction-arc" />
+            <path d="M764.9 127.3 A315.0 315.0 0 0 1 712.4 309.3" class="helper-circle" opacity="0.10" />
+            <path d="M712.4 309.3 A315.0 315.0 0 0 1 678.1 352.2" class="helper-circle" opacity="0.22" />
+            <path d="M678.1 352.2 A315.0 315.0 0 0 1 590.1 417.1" class="construction-arc" />
+            <path d="M590.1 417.1 A315.0 315.0 0 0 1 538.9 437.2" class="helper-circle" opacity="0.22" />
+            <path d="M538.9 437.2 A315.0 315.0 0 0 1 349.5 433.5" class="helper-circle" opacity="0.10" />
 
             <circle cx="262" cy="390" r="9" class="new-point" filter="url(#softGlow)" />
             <circle cx="638" cy="390" r="9" class="new-point" filter="url(#softGlow)" />
@@ -104,15 +105,14 @@
           <!-- =====================================================
                Schritt 3: Bogen um A
                Mittelpunkt A = (262|390), Radius ≈ 260.3
-               Der orangefarbene Bogen liegt auf dem Kreis um A.
                ===================================================== -->
           <g id="bogenA" class="step-element step-3">
-            <circle cx="262" cy="390" r="260.3" class="helper-circle faint-circle" />
-
-            <!-- kurzer hervorgehobener Bogen auf dem Kreis um A,
-                 zentriert um den späteren Schnittpunkt C -->
-            <path d="M377.1 156.8 A260.3 260.3 0 0 1 500.1 285.2"
-                  class="construction-arc" />
+            <!-- Fokusbogen-Struktur auf dem Kreis um A, Fokus bei C -->
+            <path d="M178.3 143.5 A260.3 260.3 0 0 1 290.3 131.2" class="helper-circle" opacity="0.10" />
+            <path d="M290.3 131.2 A260.3 260.3 0 0 1 377.1 156.5" class="helper-circle" opacity="0.22" />
+            <path d="M377.1 156.5 A260.3 260.3 0 0 1 500.2 285.1" class="construction-arc" />
+            <path d="M500.2 285.1 A260.3 260.3 0 0 1 521.7 373.0" class="helper-circle" opacity="0.22" />
+            <path d="M521.7 373.0 A260.3 260.3 0 0 1 504.6 484.3" class="helper-circle" opacity="0.10" />
           </g>
 
           <!-- =====================================================
@@ -121,14 +121,13 @@
                Schnittpunkt C = (450|210)
                ===================================================== -->
           <g id="bogenB" class="step-element step-4">
-            <circle cx="638" cy="390" r="260.3" class="helper-circle faint-circle" />
+            <!-- Fokusbogen-Struktur auf dem Kreis um B, Fokus bei C -->
+            <path d="M395.4 484.3 A260.3 260.3 0 0 1 378.3 373.0" class="helper-circle" opacity="0.10" />
+            <path d="M378.3 373.0 A260.3 260.3 0 0 1 399.8 285.1" class="helper-circle" opacity="0.22" />
+            <path d="M399.8 285.1 A260.3 260.3 0 0 1 522.9 156.5" class="construction-arc" />
+            <path d="M522.9 156.5 A260.3 260.3 0 0 1 609.7 131.2" class="helper-circle" opacity="0.22" />
+            <path d="M609.7 131.2 A260.3 260.3 0 0 1 721.7 143.5" class="helper-circle" opacity="0.10" />
 
-            <!-- kurzer hervorgehobener Bogen auf dem Kreis um B,
-                 ebenfalls zentriert um den Schnittpunkt C -->
-            <path d="M399.9 285.2 A260.3 260.3 0 0 1 522.9 156.8"
-                  class="construction-arc" />
-
-            <!-- korrigierter Schnittpunkt der beiden Kreise -->
             <circle cx="450" cy="210" r="10" class="new-point" filter="url(#softGlow)" />
             <text x="462" y="210" class="label-text new-label">C</text>
           </g>
@@ -141,7 +140,10 @@
             <line x1="450" y1="90" x2="450" y2="430" class="result-line" />
             <circle cx="450" cy="390" r="10" class="result-point" filter="url(#softGlow)" />
             <text x="462" y="430" class="label-text new-label">L</text>
-            <text x="466" y="92" class="result-label text-large">Lot</text>
+
+            <!-- rechter Winkel am Lotfußpunkt als Kreisbogen -->
+            <path d="M450 365 A25 25 0 0 1 475 390" class="result-line" fill="none" />
+            <circle cx="463" cy="377" r="3" class="result-point" />
           </g>
         </svg>
       </article>
