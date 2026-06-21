@@ -14,7 +14,7 @@ const steps = [
     visible: ["gegebeneStrecke", "zielstrahl"]
   },
   {
-    title: "Zirkelweite aufnehmen",
+    title: "Strecke AB abtragen",
     actionType: COMPASS_MEASURE,
     text: "Stich den Zirkel in A ein und öffne ihn bis B. Der blasse Kreis zeigt die eingestellte Zirkelweite. Der markierte Bogen bei B verdeutlicht: Genau diese Länge AB wird aufgenommen.",
     visible: ["gegebeneStrecke", "zielstrahl", "zirkelweite"]
