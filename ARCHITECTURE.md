@@ -41,6 +41,7 @@ geometrische_grundkonstruktionen/
 ├── css/
 │   └── style.css
 ├── js/
+│   ├── construction-player.js
 │   ├── strecke-abtragen.js
 │   ├── winkel-abtragen.js
 │   ├── senkrechte-errichten.js
@@ -85,7 +86,19 @@ Typischer Aufbau einer Konstruktionsseite:
 6. Erklärung: Warum funktioniert die Konstruktion?
 7. Hinweise oder Links zu weiterführenden Konstruktionen
 
-Die HTML-Datei soll fachliche Struktur und SVG-Elemente enthalten, aber keine große Steuerlogik.
+Die HTML-Datei enthält fachliche Struktur und SVG-Elemente, aber keine große Steuerlogik.
+
+Wenn eine Seite bereits auf die gemeinsame Schrittsteuerung umgestellt ist, lädt sie am Ende zuerst:
+
+```html
+<script src="../js/construction-player.js"></script>
+```
+
+und danach die konstruktionsspezifische Datei, z. B.:
+
+```html
+<script src="../js/strecke-abtragen.js"></script>
+```
 
 ---
 
@@ -109,52 +122,11 @@ Wiederkehrende Designentscheidungen gehören nicht in einzelne HTML-Dateien, son
 
 ---
 
-### `js/*.js`
+### `js/construction-player.js`
 
-Aktuell besitzt jede Konstruktion eine eigene JavaScript-Datei.
+Diese Datei bündelt die allgemeine Steuerung, die auf den Konstruktionsseiten wiederkehrt.
 
-Diese Dateien enthalten im Moment zwei Arten von Logik:
-
-1. allgemeine Schrittsteuerung
-2. konkrete Sichtbarkeit und Texte der jeweiligen Konstruktion
-
-Das ist für den Prototypen verständlich, führt aber bei weiteren Konstruktionen zu Wiederholungen.
-
----
-
-## Aktuelles Architekturproblem
-
-Die Schrittsteuerung ist wahrscheinlich in mehreren JS-Dateien ähnlich aufgebaut:
-
-- aktueller Schritt
-- Schritt anzeigen
-- vorwärts / zurück
-- abspielen / stoppen
-- zurücksetzen
-- Labels ein- und ausblenden
-- SVG-Elemente je Schritt sichtbar machen
-
-Diese Logik sollte mittelfristig nicht in jeder Konstruktionsdatei erneut stehen.
-
----
-
-## Zielarchitektur nach dem nächsten Refactoring
-
-Empfohlene nächste Struktur:
-
-```text
-js/
-├── construction-player.js
-├── strecke-abtragen.js
-├── winkel-abtragen.js
-├── senkrechte-errichten.js
-├── mittelsenkrechte.js
-└── lot-faellen.js
-```
-
-### `construction-player.js`
-
-Diese Datei soll die allgemeine Steuerung übernehmen:
+Sie übernimmt:
 
 - Schrittindex verwalten
 - Buttons verbinden
@@ -164,9 +136,21 @@ Diese Datei soll die allgemeine Steuerung übernehmen:
 - optionale Labels ein- und ausblenden
 - SVG-Elemente anhand von Schrittdefinitionen sichtbar machen
 
-### einzelne Konstruktionsdateien
+Die Funktion wird so genutzt:
 
-Die einzelnen Dateien sollen danach nur noch die fachliche Konfiguration enthalten:
+```js
+initConstructionPlayer({
+  steps
+});
+```
+
+Die Datei wurde zunächst als Pilot für `Strecke abtragen` eingeführt. Die übrigen Konstruktionen sollen danach schrittweise umgestellt werden.
+
+---
+
+### einzelne Konstruktionsdateien in `js/`
+
+Die einzelnen Dateien sollen langfristig nur noch die fachliche Konfiguration enthalten:
 
 ```js
 const steps = [
@@ -182,7 +166,27 @@ initConstructionPlayer({
 });
 ```
 
-Das ist nur ein Zielbild. Vor der Umsetzung muss die tatsächliche vorhandene JS-Struktur geprüft werden.
+Aktueller Stand:
+
+- `strecke-abtragen.js` nutzt bereits die gemeinsame Steuerung.
+- Die übrigen Konstruktionsdateien enthalten noch eigene Steuerlogik und sollen später angepasst werden.
+
+---
+
+## Aktuelles Architekturproblem
+
+Die Schrittsteuerung ist noch nicht auf allen Seiten vereinheitlicht.
+
+Bereits gelöst:
+
+- `Strecke abtragen` nutzt `js/construction-player.js`.
+
+Noch offen:
+
+- `Winkel abtragen`
+- `Senkrechte errichten`
+- `Mittelsenkrechte`
+- `Lot fällen`
 
 ---
 
@@ -262,15 +266,13 @@ Die konkrete vorhandene HTML-Struktur darf davon abweichen, sollte aber langfris
 
 ## Erweiterungsstrategie
 
-Vor neuen Konstruktionen sollte zuerst die gemeinsame Schrittsteuerung ausgelagert werden.
+Vor neuen Konstruktionen sollte zuerst die gemeinsame Schrittsteuerung weiter ausgerollt werden.
 
 Empfohlene Reihenfolge:
 
-1. Dokumentation und Architekturstand festhalten
-2. gemeinsame Schrittsteuerung extrahieren
-3. eine bestehende Konstruktion testweise auf die neue Steuerung umstellen
-4. danach weitere bestehende Konstruktionen umstellen
-5. erst danach neue Konstruktionen ergänzen
+1. `Strecke abtragen` als Pilot prüfen
+2. weitere bestehende Konstruktionen auf `construction-player.js` umstellen
+3. danach neue Konstruktionen ergänzen
 
 Vorteil:
 
@@ -291,6 +293,14 @@ Nach jeder größeren Änderung sollten mindestens folgende Punkte geprüft werd
 - Legende bleibt sichtbar und verständlich
 - SVG-Elemente erscheinen im richtigen Schritt
 - keine JavaScript-Fehler in der Browser-Konsole
+
+Für den aktuellen Pilot besonders prüfen:
+
+- `konstruktionen/strecke-abtragen.html` öffnen
+- Weiter / Zurück testen
+- Abspielen / Pause testen
+- Neu starten testen
+- Beschriftung ausblenden / einblenden testen
 
 ---
 
