@@ -40,6 +40,8 @@ geometrische_grundkonstruktionen/
 ├── index.html
 ├── css/
 │   └── style.css
+├── docs/
+│   └── konstruktionsbausteine.md
 ├── js/
 │   ├── construction-player.js
 │   ├── strecke-abtragen.js
@@ -154,6 +156,8 @@ initConstructionPlayer({
 });
 ```
 
+`construction-player.js` nutzt aktuell `title`, `text`, `visible` und optional `active`. Das Feld `actionType` wird als fachliche Zusatzinformation mitgeführt, verändert die Steuerlogik aber noch nicht.
+
 ---
 
 ### einzelne Konstruktionsdateien in `js/`
@@ -165,9 +169,11 @@ Standardform:
 ```js
 const steps = [
   {
-    title: "Schritt 1",
-    text: "...",
-    visible: ["element-id-1", "element-id-2"]
+    title: "Zirkelweite aufnehmen",
+    actionType: "compass-measure",
+    text: "Stelle den Zirkel auf die Länge AB ein.",
+    visible: ["point-a", "point-b", "segment-ab"],
+    active: ["segment-ab"]
   }
 ];
 
@@ -176,15 +182,37 @@ initConstructionPlayer({
 });
 ```
 
+`actionType` beschreibt den fachlichen Konstruktionsbaustein eines Schrittes. Die verbindlichen Bausteine stehen in `docs/konstruktionsbausteine.md`.
+
+Typische Werte sind:
+
+```text
+segment-draw
+line-draw
+circle-draw
+arc-draw
+compass-measure
+distance-transfer
+intersection-mark
+result-highlight
+```
+
+Sondertypen sind möglich, wenn sie eine Ausgangslage beschreiben, zum Beispiel:
+
+```text
+angle-given
+line-given
+```
+
 Aktueller Stand:
 
-- `strecke-abtragen.js` nutzt die gemeinsame Steuerung.
-- `winkel-abtragen.js` nutzt die gemeinsame Steuerung.
-- `senkrechte-errichten.js` nutzt die gemeinsame Steuerung.
-- `mittelsenkrechte.js` nutzt die gemeinsame Steuerung und enthält zusätzlich eine kleine Zeichnungskorrektur.
-- `lot-faellen.js` nutzt die gemeinsame Steuerung.
+- `strecke-abtragen.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
+- `winkel-abtragen.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
+- `senkrechte-errichten.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
+- `mittelsenkrechte.js` nutzt die gemeinsame Steuerung, typisierte Schritte und enthält zusätzlich eine kleine Zeichnungskorrektur.
+- `lot-faellen.js` nutzt die gemeinsame Steuerung und typisierte Schritte.
 
-Damit ist die gemeinsame Schrittsteuerung für alle aktuell aktiven Konstruktionsseiten ausgerollt.
+Damit ist die gemeinsame Schrittsteuerung für alle aktuell aktiven Konstruktionsseiten ausgerollt und die vorhandenen Schrittlisten sind fachlich typisiert.
 
 ---
 
@@ -218,123 +246,4 @@ construction-card
 construction-panel
 step-box
 legend-item
-svg-helper
-svg-result
-```
-
----
-
-## Konstruktionsseiten: empfohlener Standardaufbau
-
-Neue Konstruktionsseiten sollen möglichst diesem Aufbau folgen:
-
-```html
-<header>
-  <!-- Titel und Zurück-Link -->
-</header>
-
-<main>
-  <section class="concept-card">
-    <!-- Was wird konstruiert? -->
-  </section>
-
-  <section class="construction-layout">
-    <article class="drawing-card">
-      <!-- SVG -->
-    </article>
-
-    <aside class="step-card">
-      <!-- Schritttext und Buttons -->
-    </aside>
-  </section>
-
-  <section class="legend-card">
-    <!-- Strichkonzept -->
-  </section>
-
-  <section class="info-card">
-    <!-- Warum funktioniert das? -->
-  </section>
-</main>
-```
-
-Die konkrete vorhandene HTML-Struktur darf davon abweichen, sollte aber langfristig in diese Richtung vereinheitlicht werden.
-
----
-
-## Erweiterungsstrategie
-
-Da die gemeinsame Schrittsteuerung jetzt auf allen aktiven Konstruktionsseiten verwendet wird, können neue Konstruktionen künftig nach einem festen Muster entstehen:
-
-1. HTML-Seite mit SVG und Standard-Steuerbuttons anlegen.
-2. Neue `js/<konstruktion>.js` mit `steps` erstellen.
-3. In der HTML-Datei zuerst `construction-player.js` und danach die neue Konstruktionsdatei laden.
-4. Link auf der Startseite ergänzen.
-5. README, PROJECT_CONTEXT und CHANGELOG prüfen.
-
-Vorteil:
-
-Neue Konstruktionen können schneller erstellt werden, weil die Bedienlogik nicht mehr kopiert werden muss.
-
----
-
-## Teststrategie
-
-Nach jeder größeren Änderung sollten mindestens folgende Punkte geprüft werden:
-
-- `index.html` öffnet im Browser bzw. über GitHub Pages.
-- alle Konstruktionskarten führen zur richtigen Seite.
-- jede Konstruktionsseite lädt CSS und JS korrekt.
-- Schritt vor / zurück funktioniert.
-- Abspielen funktioniert.
-- Zurücksetzen funktioniert.
-- Beschriftung ausblenden / einblenden funktioniert.
-- Legende bleibt sichtbar und verständlich.
-- SVG-Elemente erscheinen im richtigen Schritt.
-- keine JavaScript-Fehler in der Browser-Konsole.
-
-Nach dem Refactoring der gemeinsamen Schrittsteuerung sind besonders alle aktiven Seiten zu prüfen:
-
-- `konstruktionen/strecke-abtragen.html`
-- `konstruktionen/winkel-abtragen.html`
-- `konstruktionen/senkrechte-errichten.html`
-- `konstruktionen/mittelsenkrechte.html`
-- `konstruktionen/lot-faellen.html`
-
----
-
-## Dokumentationsregel
-
-Nach größeren Änderungen prüfen:
-
-- Muss `README.md` aktualisiert werden?
-- Muss `PROJECT_CONTEXT.md` aktualisiert werden?
-- Muss `CHANGELOG.md` ergänzt werden?
-- Muss `ARCHITECTURE.md` angepasst werden?
-
-Besonders bei neuen Konstruktionen muss mindestens `PROJECT_CONTEXT.md` und `CHANGELOG.md` geprüft werden.
-
----
-
-## Git-Regel
-
-Für größere Änderungen eigene Branches verwenden.
-
-Beispiele:
-
-```text
-docs/project-architecture
-refactor/shared-construction-player
-feat/winkel-halbieren
-feat/strecke-teilen
-style/beamer-mode
-```
-
-Commit-Messages kurz und auf Englisch:
-
-```text
-docs: add architecture overview
-refactor: extract shared construction step controller
-feat: add angle bisector construction
-style: add beamer mode
 ```
