@@ -251,7 +251,22 @@ Diese Punkte sollten bei kommenden Konstruktionen besonders sorgfältig geprüft
 
 ---
 
-## 8. Arbeitsregel für neue Konstruktionsseiten
+## 8. Zukunftsidee: Bausteinübersicht auf der Webseite
+
+Für eine spätere Ausbaustufe soll eine eigene Übersicht der Konstruktionsbausteine entstehen.
+
+Mögliche Umsetzung:
+
+- Die Lernenden können auf der Webseite durch alle verfügbaren Konstruktionsbausteine scrollen.
+- Jeder Baustein zeigt Name, kurze Erklärung und eine beispielhafte Mini-Zeichnung.
+- Bei Klick auf einen Baustein können passende Konstruktionen verlinkt werden, in denen dieser Baustein vorkommt.
+- Die Beispiele sollen möglichst aus denselben SVG-/CSS-Konventionen bestehen wie die eigentlichen Konstruktionsseiten.
+
+Diese Übersicht wird erst umgesetzt, wenn die bestehenden Bausteine und ihre Darstellung weiter stabilisiert sind.
+
+---
+
+## 9. Arbeitsregel für neue Konstruktionsseiten
 
 Vor dem Anlegen einer neuen Konstruktionsseite wird die Konstruktion zuerst in Bausteine zerlegt.
 
