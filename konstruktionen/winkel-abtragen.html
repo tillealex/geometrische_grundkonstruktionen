@@ -64,19 +64,25 @@
             <circle cx="165" cy="345" r="8" class="given-point" />
             <text x="140" y="382" class="label-text">S</text>
             <text x="250" y="315" class="label-text">α</text>
-            <text x="145" y="178" class="tool-label">gegebener Winkel</text>
           </g>
 
           <g id="zielstrahl" class="step-element step-2">
             <line x1="540" y1="345" x2="980" y2="345" class="radius-line" />
             <circle cx="540" cy="345" r="8" class="given-point" />
             <text x="518" y="382" class="label-text">P</text>
-            <text x="612" y="392" class="tool-label">Hilfsstrahl</text>
           </g>
 
           <g id="bogenOriginal" class="step-element step-3">
-            <circle cx="165" cy="345" r="120" class="helper-circle faint-circle" />
-            <path d="M285 345 A120 120 0 0 0 259 271" class="construction-arc" />
+            <path d="M 45.0 345.0 A 120.0 120.0 0 0 0 73.1 422.1" class="helper-circle" style="opacity: 0.04" />
+            <path d="M 73.1 422.1 A 120.0 120.0 0 0 0 154.5 464.5" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 154.5 464.5 A 120.0 120.0 0 0 0 233.8 443.3" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 233.8 443.3 A 120.0 120.0 0 0 0 268.9 405.0" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 268.9 405.0 A 120.0 120.0 0 0 0 283.2 365.8" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 283.2 365.8 A 120.0 120.0 0 0 0 245.0 255.5" class="construction-arc" />
+            <path d="M 245.0 255.5 A 120.0 120.0 0 0 0 206.0 232.2" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 206.0 232.2 A 120.0 120.0 0 0 0 124.0 232.2" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 124.0 232.2 A 120.0 120.0 0 0 0 61.1 285.0" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 61.1 285.0 A 120.0 120.0 0 0 0 45.0 345.0" class="helper-circle" style="opacity: 0.06" />
             <circle cx="285" cy="345" r="9" class="new-point" filter="url(#softGlow)" />
             <circle cx="259" cy="271" r="9" class="new-point" filter="url(#softGlow)" />
             <text x="292" y="382" class="label-text new-label">E</text>
@@ -84,39 +90,55 @@
           </g>
 
           <g id="bogenZiel" class="step-element step-4">
-            <circle cx="540" cy="345" r="120" class="helper-circle faint-circle" />
-            <path d="M660 345 A120 120 0 0 0 634 271" class="construction-arc" />
+            <path d="M 420.0 345.0 A 120.0 120.0 0 0 0 448.1 422.1" class="helper-circle" style="opacity: 0.04" />
+            <path d="M 448.1 422.1 A 120.0 120.0 0 0 0 529.5 464.5" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 529.5 464.5 A 120.0 120.0 0 0 0 608.8 443.3" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 608.8 443.3 A 120.0 120.0 0 0 0 643.9 405.0" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 643.9 405.0 A 120.0 120.0 0 0 0 658.2 365.8" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 658.2 365.8 A 120.0 120.0 0 0 0 620.0 255.5" class="construction-arc" />
+            <path d="M 620.0 255.5 A 120.0 120.0 0 0 0 581.0 232.2" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 581.0 232.2 A 120.0 120.0 0 0 0 499.0 232.2" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 499.0 232.2 A 120.0 120.0 0 0 0 436.1 285.0" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 436.1 285.0 A 120.0 120.0 0 0 0 420.0 345.0" class="helper-circle" style="opacity: 0.06" />
             <circle cx="660" cy="345" r="9" class="new-point" filter="url(#softGlow)" />
             <text x="667" y="382" class="label-text new-label">G</text>
           </g>
 
           <g id="abstandAufnehmen" class="step-element step-5">
-            <!-- Abstand EF am Originalwinkel aufnehmen:
-                 Hilfskreis um E mit Radius EF.
-                 Hervorgehoben wird nur ein kurzer Bogen um F herum:
-                 ungefähr 20° links und 20° rechts von F. -->
             <line x1="285" y1="345" x2="259" y2="271" class="radius-line" />
-            <circle cx="285" cy="345" r="78.5" class="helper-circle faint-circle" />
-            <path d="M235.2 284.3 A78.5 78.5 0 0 1 285.9 266.5" class="construction-arc" />
+            <path d="M 297.8 422.4 A 78.4 78.4 0 0 0 348.7 390.7" class="helper-circle" style="opacity: 0.04" />
+            <path d="M 348.7 390.7 A 78.4 78.4 0 0 0 362.4 332.2" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 362.4 332.2 A 78.4 78.4 0 0 0 341.1 290.2" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 341.1 290.2 A 78.4 78.4 0 0 0 312.6 271.6" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 312.6 271.6 A 78.4 78.4 0 0 0 272.2 267.6" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 272.2 267.6 A 78.4 78.4 0 0 0 246.5 276.6" class="construction-arc" />
+            <path d="M 246.5 276.6 A 78.4 78.4 0 0 0 217.5 305.0" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 217.5 305.0 A 78.4 78.4 0 0 0 206.9 337.3" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 206.9 337.3 A 78.4 78.4 0 0 0 216.6 383.5" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 216.6 383.5 A 78.4 78.4 0 0 0 263.9 420.5" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 263.9 420.5 A 78.4 78.4 0 0 0 323.5 413.4" class="helper-circle" style="opacity: 0.04" />
           </g>
 
           <g id="abstandUebertragen" class="step-element step-6">
-            <!-- Gleiche Zirkelweite am Zielwinkel von G aus abtragen:
-                 Hilfskreis um G mit Radius EF.
-                 Hervorgehoben wird nur der kurze Bogen um H herum:
-                 ungefähr 20° links und 20° rechts von H. -->
-            <circle cx="660" cy="345" r="78.5" class="helper-circle faint-circle" />
-            <path d="M610.2 284.3 A78.5 78.5 0 0 1 660.9 266.5" class="construction-arc" />
-
+            <path d="M 672.8 422.4 A 78.4 78.4 0 0 0 723.7 390.7" class="helper-circle" style="opacity: 0.04" />
+            <path d="M 723.7 390.7 A 78.4 78.4 0 0 0 737.4 332.2" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 737.4 332.2 A 78.4 78.4 0 0 0 716.1 290.2" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 716.1 290.2 A 78.4 78.4 0 0 0 687.6 271.6" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 687.6 271.6 A 78.4 78.4 0 0 0 647.2 267.6" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 647.2 267.6 A 78.4 78.4 0 0 0 621.5 276.6" class="construction-arc" />
+            <path d="M 621.5 276.6 A 78.4 78.4 0 0 0 592.5 305.0" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 592.5 305.0 A 78.4 78.4 0 0 0 581.9 337.3" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 581.9 337.3 A 78.4 78.4 0 0 0 591.6 383.5" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 591.6 383.5 A 78.4 78.4 0 0 0 638.9 420.5" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 638.9 420.5 A 78.4 78.4 0 0 0 698.5 413.4" class="helper-circle" style="opacity: 0.04" />
             <circle cx="634" cy="271" r="10" class="new-point" filter="url(#softGlow)" />
             <text x="645" y="260" class="label-text new-label">H</text>
           </g>
 
           <g id="ergebnis" class="step-element step-7">
+            <line x1="540" y1="345" x2="760" y2="345" class="result-line" />
             <line x1="540" y1="345" x2="850" y2="100" class="result-line" />
             <path d="M617 345 A77 77 0 0 0 600 297" class="result-line" />
-            <text x="614" y="318" class="result-label text-large">α</text>
-            <text x="610" y="146" class="result-label text-large">übertragener Winkel</text>
           </g>
         </svg>
       </article>
