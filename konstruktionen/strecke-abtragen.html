@@ -60,7 +60,6 @@
             <circle cx="390" cy="150" r="8" class="given-point" />
             <text x="150" y="188" class="label-text">A</text>
             <text x="404" y="188" class="label-text">B</text>
-            <text x="210" y="112" class="tool-label">gegebene Länge AB</text>
           </g>
 
           <g id="zielstrahl" class="step-element step-2">
@@ -71,10 +70,18 @@
           </g>
 
           <g id="zirkelweite" class="step-element step-3">
-            <circle cx="170" cy="150" r="220" class="helper-circle faint-circle" />
-            <path d="M357 35 A220 220 0 0 1 357 265" class="construction-arc" />
+            <path d="M -50 150 A 220 220 0 0 1 60 -40.5" class="helper-circle" style="opacity: 0.04" />
+            <path d="M 60 -40.5 A 220 220 0 0 1 245.2 -56.7" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 245.2 -56.7 A 220 220 0 0 1 350.2 23.8" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 350.2 23.8 A 220 220 0 0 1 376.7 74.8" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 376.7 74.8 A 220 220 0 0 1 386.7 111.8" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 386.7 111.8 A 220 220 0 0 1 386.7 188.2" class="construction-arc" />
+            <path d="M 386.7 188.2 A 220 220 0 0 1 376.7 225.2" class="helper-circle" style="opacity: 0.26" />
+            <path d="M 376.7 225.2 A 220 220 0 0 1 350.2 276.2" class="helper-circle" style="opacity: 0.17" />
+            <path d="M 350.2 276.2 A 220 220 0 0 1 245.2 356.7" class="helper-circle" style="opacity: 0.10" />
+            <path d="M 245.2 356.7 A 220 220 0 0 1 60 340.5" class="helper-circle" style="opacity: 0.06" />
+            <path d="M 60 340.5 A 220 220 0 0 1 -50 150" class="helper-circle" style="opacity: 0.04" />
             <path d="M170 150 L390 150" class="radius-line" />
-            <text x="330" y="26" class="tool-label">Länge AB mit dem Zirkel aufnehmen</text>
           </g>
 
           <g id="bogenP" class="step-element step-4">
