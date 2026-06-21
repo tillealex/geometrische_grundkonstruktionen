@@ -48,3 +48,30 @@ const steps = [
 initConstructionPlayer({
   steps
 });
+
+function refineFinalTransferredAngle() {
+  const resultGroup = document.querySelector("#ergebnis");
+  if (!resultGroup) return;
+
+  const resultLines = resultGroup.querySelectorAll("line.result-line");
+  const upperRay = resultLines[1];
+  if (!upperRay) return;
+
+  upperRay.setAttribute("x2", "713");
+  upperRay.setAttribute("y2", "209");
+
+  if (!resultGroup.querySelector("#schenkelHVerlaengerung")) {
+    const extension = document.createElementNS("http://www.w3.org/2000/svg", "line");
+    extension.setAttribute("id", "schenkelHVerlaengerung");
+    extension.setAttribute("x1", "713");
+    extension.setAttribute("y1", "209");
+    extension.setAttribute("x2", "850");
+    extension.setAttribute("y2", "100");
+    extension.setAttribute("class", "helper-line");
+    extension.setAttribute("stroke-dasharray", "8 8");
+    extension.setAttribute("opacity", "0.55");
+    resultGroup.insertBefore(extension, upperRay.nextSibling);
+  }
+}
+
+refineFinalTransferredAngle();
