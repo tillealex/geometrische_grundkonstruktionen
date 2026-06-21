@@ -17,6 +17,7 @@ function initConstructionPlayer(config) {
     stepCounter: "stepCounter",
     stepTitle: "stepTitle",
     stepText: "stepText",
+    actionTypeLabel: "actionTypeLabel",
     prevStep: "prevStep",
     nextStep: "nextStep",
     playSteps: "playSteps",
@@ -63,6 +64,88 @@ function initConstructionPlayer(config) {
   requireElement(playStepsButton, selectors.playSteps);
   requireElement(resetStepsButton, selectors.resetSteps);
 
+  function ensureActionTypeStyles() {
+    if (document.getElementById("construction-action-type-styles")) {
+      return;
+    }
+
+    const style = document.createElement("style");
+    style.id = "construction-action-type-styles";
+    style.textContent = `
+      .action-type-label {
+        display: inline-flex;
+        align-items: center;
+        align-self: flex-start;
+        gap: 0.4rem;
+        margin: 0 0 12px;
+        padding: 7px 10px;
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        background: #f8fafc;
+        color: var(--accent-dark);
+        font-size: 0.88rem;
+        font-weight: 900;
+      }
+
+      .action-type-label::before {
+        content: "Baustein";
+        color: var(--muted);
+        font-size: 0.72rem;
+        font-weight: 800;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .action-type-label[hidden] {
+        display: none;
+      }
+    `;
+    document.head.appendChild(style);
+  }
+
+  function createActionTypeLabel() {
+    let actionTypeLabel = document.getElementById(selectors.actionTypeLabel);
+
+    if (!actionTypeLabel && stepCounter) {
+      actionTypeLabel = document.createElement("div");
+      actionTypeLabel.id = selectors.actionTypeLabel;
+      actionTypeLabel.className = "action-type-label";
+      actionTypeLabel.setAttribute("aria-live", "polite");
+      stepCounter.insertAdjacentElement("afterend", actionTypeLabel);
+    }
+
+    return actionTypeLabel;
+  }
+
+  ensureActionTypeStyles();
+  const actionTypeLabel = createActionTypeLabel();
+
+  function getActionTypeInfo(actionType) {
+    if (!actionType || !window.ConstructionActionTypeInfo) {
+      return null;
+    }
+
+    return window.ConstructionActionTypeInfo[actionType] || null;
+  }
+
+  function updateActionTypeLabel(step) {
+    if (!actionTypeLabel) {
+      return;
+    }
+
+    const actionTypeInfo = getActionTypeInfo(step.actionType);
+    const label = actionTypeInfo?.label || step.actionType;
+
+    if (!label) {
+      actionTypeLabel.hidden = true;
+      actionTypeLabel.textContent = "";
+      return;
+    }
+
+    actionTypeLabel.hidden = false;
+    actionTypeLabel.textContent = label;
+  }
+
   function clampStep(index) {
     return Math.max(0, Math.min(index, steps.length - 1));
   }
@@ -91,6 +174,7 @@ function initConstructionPlayer(config) {
     if (stepCounter) {
       stepCounter.textContent = `Schritt ${currentStep + 1} von ${steps.length}`;
     }
+    updateActionTypeLabel(step);
     if (stepTitle) {
       stepTitle.textContent = step.title;
     }
