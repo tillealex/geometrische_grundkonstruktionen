@@ -24,7 +24,7 @@ Es verwendet bewusst nicht:
 - externe Serverlogik
 - unnötige Abhängigkeiten
 
-Die Webseite soll lokal durch Öffnen der `index.html` im Browser funktionieren.
+Die Webseite soll lokal durch Öffnen der `index.html` im Browser funktionieren und ebenso über GitHub Pages veröffentlicht werden können.
 
 ---
 
@@ -88,13 +88,13 @@ Typischer Aufbau einer Konstruktionsseite:
 
 Die HTML-Datei enthält fachliche Struktur und SVG-Elemente, aber keine große Steuerlogik.
 
-Wenn eine Seite bereits auf die gemeinsame Schrittsteuerung umgestellt ist, lädt sie am Ende zuerst:
+Alle aktiven Konstruktionsseiten laden am Ende zuerst die gemeinsame Steuerung:
 
 ```html
 <script src="../js/construction-player.js"></script>
 ```
 
-und danach die konstruktionsspezifische Datei, z. B.:
+und danach die konstruktionsspezifische Datei, zum Beispiel:
 
 ```html
 <script src="../js/strecke-abtragen.js"></script>
@@ -133,8 +133,9 @@ Sie übernimmt:
 - Schritttext anzeigen
 - Play-/Pause-Funktion steuern
 - Reset ausführen
-- optionale Labels ein- und ausblenden
+- Labels ein- und ausblenden
 - SVG-Elemente anhand von Schrittdefinitionen sichtbar machen
+- das jeweils zuletzt sichtbare Element als aktiv hervorheben
 
 Die Funktion wird so genutzt:
 
@@ -144,13 +145,22 @@ initConstructionPlayer({
 });
 ```
 
-Die Datei wurde zunächst als Pilot für `Strecke abtragen` eingeführt. Die übrigen Konstruktionen sollen danach schrittweise umgestellt werden.
+Optional kann pro Konstruktion eine andere Abspielgeschwindigkeit gesetzt werden:
+
+```js
+initConstructionPlayer({
+  steps,
+  playbackDelay: 1600
+});
+```
 
 ---
 
 ### einzelne Konstruktionsdateien in `js/`
 
-Die einzelnen Dateien sollen langfristig nur noch die fachliche Konfiguration enthalten:
+Die einzelnen Konstruktionsdateien enthalten nur noch die fachliche Konfiguration und bei Bedarf sehr kleine konstruktionsspezifische Vorbereitungen.
+
+Standardform:
 
 ```js
 const steps = [
@@ -168,25 +178,13 @@ initConstructionPlayer({
 
 Aktueller Stand:
 
-- `strecke-abtragen.js` nutzt bereits die gemeinsame Steuerung.
-- Die übrigen Konstruktionsdateien enthalten noch eigene Steuerlogik und sollen später angepasst werden.
+- `strecke-abtragen.js` nutzt die gemeinsame Steuerung.
+- `winkel-abtragen.js` nutzt die gemeinsame Steuerung.
+- `senkrechte-errichten.js` nutzt die gemeinsame Steuerung.
+- `mittelsenkrechte.js` nutzt die gemeinsame Steuerung und enthält zusätzlich eine kleine Zeichnungskorrektur.
+- `lot-faellen.js` nutzt die gemeinsame Steuerung.
 
----
-
-## Aktuelles Architekturproblem
-
-Die Schrittsteuerung ist noch nicht auf allen Seiten vereinheitlicht.
-
-Bereits gelöst:
-
-- `Strecke abtragen` nutzt `js/construction-player.js`.
-
-Noch offen:
-
-- `Winkel abtragen`
-- `Senkrechte errichten`
-- `Mittelsenkrechte`
-- `Lot fällen`
+Damit ist die gemeinsame Schrittsteuerung für alle aktuell aktiven Konstruktionsseiten ausgerollt.
 
 ---
 
@@ -236,25 +234,25 @@ Neue Konstruktionsseiten sollen möglichst diesem Aufbau folgen:
 </header>
 
 <main>
-  <section class="concept-box">
+  <section class="concept-card">
     <!-- Was wird konstruiert? -->
   </section>
 
   <section class="construction-layout">
-    <div class="drawing-panel">
+    <article class="drawing-card">
       <!-- SVG -->
-    </div>
+    </article>
 
-    <aside class="step-panel">
+    <aside class="step-card">
       <!-- Schritttext und Buttons -->
     </aside>
   </section>
 
-  <section class="legend">
+  <section class="legend-card">
     <!-- Strichkonzept -->
   </section>
 
-  <section class="reason-box">
+  <section class="info-card">
     <!-- Warum funktioniert das? -->
   </section>
 </main>
@@ -266,17 +264,17 @@ Die konkrete vorhandene HTML-Struktur darf davon abweichen, sollte aber langfris
 
 ## Erweiterungsstrategie
 
-Vor neuen Konstruktionen sollte zuerst die gemeinsame Schrittsteuerung weiter ausgerollt werden.
+Da die gemeinsame Schrittsteuerung jetzt auf allen aktiven Konstruktionsseiten verwendet wird, können neue Konstruktionen künftig nach einem festen Muster entstehen:
 
-Empfohlene Reihenfolge:
-
-1. `Strecke abtragen` als Pilot prüfen
-2. weitere bestehende Konstruktionen auf `construction-player.js` umstellen
-3. danach neue Konstruktionen ergänzen
+1. HTML-Seite mit SVG und Standard-Steuerbuttons anlegen.
+2. Neue `js/<konstruktion>.js` mit `steps` erstellen.
+3. In der HTML-Datei zuerst `construction-player.js` und danach die neue Konstruktionsdatei laden.
+4. Link auf der Startseite ergänzen.
+5. README, PROJECT_CONTEXT und CHANGELOG prüfen.
 
 Vorteil:
 
-Neue Konstruktionen können später schneller erstellt werden, weil nur noch die fachlichen Schritte und SVG-Elemente ergänzt werden müssen.
+Neue Konstruktionen können schneller erstellt werden, weil die Bedienlogik nicht mehr kopiert werden muss.
 
 ---
 
@@ -284,23 +282,24 @@ Neue Konstruktionen können später schneller erstellt werden, weil nur noch die
 
 Nach jeder größeren Änderung sollten mindestens folgende Punkte geprüft werden:
 
-- `index.html` öffnet lokal im Browser
-- alle Konstruktionskarten führen zur richtigen Seite
-- jede Konstruktionsseite lädt CSS und JS korrekt
-- Schritt vor / zurück funktioniert
-- Abspielen funktioniert
-- Zurücksetzen funktioniert
-- Legende bleibt sichtbar und verständlich
-- SVG-Elemente erscheinen im richtigen Schritt
-- keine JavaScript-Fehler in der Browser-Konsole
+- `index.html` öffnet im Browser bzw. über GitHub Pages.
+- alle Konstruktionskarten führen zur richtigen Seite.
+- jede Konstruktionsseite lädt CSS und JS korrekt.
+- Schritt vor / zurück funktioniert.
+- Abspielen funktioniert.
+- Zurücksetzen funktioniert.
+- Beschriftung ausblenden / einblenden funktioniert.
+- Legende bleibt sichtbar und verständlich.
+- SVG-Elemente erscheinen im richtigen Schritt.
+- keine JavaScript-Fehler in der Browser-Konsole.
 
-Für den aktuellen Pilot besonders prüfen:
+Nach dem Refactoring der gemeinsamen Schrittsteuerung sind besonders alle aktiven Seiten zu prüfen:
 
-- `konstruktionen/strecke-abtragen.html` öffnen
-- Weiter / Zurück testen
-- Abspielen / Pause testen
-- Neu starten testen
-- Beschriftung ausblenden / einblenden testen
+- `konstruktionen/strecke-abtragen.html`
+- `konstruktionen/winkel-abtragen.html`
+- `konstruktionen/senkrechte-errichten.html`
+- `konstruktionen/mittelsenkrechte.html`
+- `konstruktionen/lot-faellen.html`
 
 ---
 
